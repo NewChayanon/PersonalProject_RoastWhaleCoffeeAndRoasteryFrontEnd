@@ -13,7 +13,7 @@ export function IconCart({ width }) {
   return <img style={{ width: `${width}px` }} src={cart} alt="icon-cart" />;
 }
 
-export function Iconfacebook({ width }) {
+export function IconFacebook({ width }) {
   return (
     <img style={{ width: `${width}px` }} src={facebook} alt="icon-facebook" />
   );

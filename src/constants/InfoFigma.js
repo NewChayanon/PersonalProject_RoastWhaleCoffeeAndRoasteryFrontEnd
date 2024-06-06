@@ -5,6 +5,7 @@ export const BACKGROUND_COLOR = {
 export const TEXT_COLOR = {
   "Primary/50": "text-[#FEF5E6]",
   "Primary/950": "text-[#190F01]",
+  "Neutral/500": "text-[#707070]",
   "Support01/500": "text-[#603709]",
   "Support01/950": "text-[#170D02]",
 };

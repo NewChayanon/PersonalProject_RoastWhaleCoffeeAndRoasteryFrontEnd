@@ -5,8 +5,12 @@
 @tailwind utilities;
 
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-
-#root{
-  font-family: "Inter","Kanit", sans-serif;
+#root {
+  font-family: "Inter", "Kanit", sans-serif;
 }

@@ -1,21 +1,11 @@
+import { FONT_WEIGHT, TEXT_COLOR, TEXT_SIZE } from "../constants/InfoFigma";
 
-const textSizeMap={
-    12:"text-xs",
-    16:"text-base",
-    24:"text-2xl"
-}
-const textColorMap={
-    "Primary/50":"text-[#FEF5E6]"
-}
-const fontWeight ={
-    "ExtraBold":"font-extrabold",
-    "Regular":"font-normal",
-    "SemiBold":"font-semibold"
-}
-
-
-export default function Span({children, size, color, width}) {
+export default function Span({ children, size, color, width }) {
   return (
-    <span className={`${textSizeMap[size]} ${textColorMap[color]} ${fontWeight[width]} `}>{children}</span>
-  )
+    <span
+      className={`${TEXT_SIZE[size]} ${TEXT_COLOR[color]} ${FONT_WEIGHT[width]} `}
+    >
+      {children}
+    </span>
+  );
 }

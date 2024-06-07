@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const LoginAndRegisterList = [
   { id: uuidv4(), title: "เข้าสู่ระบบ", size: 14,to:"/logins" },
-  { id: uuidv4(), title: "ลงทะเบียน", size: 14,to:"registers" },
+  { id: uuidv4(), title: "ลงทะเบียน", size: 14,to:"/registers" },
 ];
 
 export default function ButtonLoginAndRegister() {

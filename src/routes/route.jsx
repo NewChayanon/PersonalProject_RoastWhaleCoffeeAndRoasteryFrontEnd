@@ -7,6 +7,7 @@ import CoffeePage from "../pages/CoffeePage";
 import ToolPage from "../pages/ToolPage";
 import CartPage from "../pages/CartPage";
 import LoginPage from "../pages/LoginPage";
+import RegisterPage from "../pages/RegisterPage";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
     ],
   },
   { path: "/logins", element: <LoginPage /> },
-  { path: "/registers", element: "/registers" },
+  { path: "/registers", element: <RegisterPage/> },
 ]);
 
 export default function Router() {

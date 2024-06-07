@@ -13,7 +13,7 @@ export default function CoffeePage() {
           ได้สูงที่สุด แสดงความเป็นลักษณะของกาแฟแต่ละประเภทได้ดี
         </Span>
       </div>
-      <div className="grid grid-cols-4">
+      <div className="grid grid-cols-4 gap-2">
         {/* wait edit */}
         <ProductContainer />
         <ProductContainer />

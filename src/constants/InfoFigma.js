@@ -1,5 +1,6 @@
 export const BACKGROUND_COLOR = {
   "Primary/500": "bg-[#F9C06A]",
+  none:""
 };
 
 export const TEXT_COLOR = {

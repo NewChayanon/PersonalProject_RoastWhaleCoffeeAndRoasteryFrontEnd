@@ -5,16 +5,18 @@ import {
   TEXT_SIZE,
 } from "../constants/InfoFigma";
 
+
 export default function Button({
   bg = "Primary/500",
   color = "Primary/950",
   size = 12,
   weight = "SemiBold",
+  round = "",
   children,
 }) {
   return (
     <button
-      className={`${BACKGROUND_COLOR[bg]} ${TEXT_COLOR[color]} ${FONT_WEIGHT[weight]} ${TEXT_SIZE[size]}`}
+      className={`${BACKGROUND_COLOR[bg]} ${TEXT_COLOR[color]} ${FONT_WEIGHT[weight]} ${TEXT_SIZE[size]} `}
     >
       {children}
     </button>

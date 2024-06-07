@@ -23,7 +23,8 @@ export const TEXT_SIZE = {
 };
 
 export const FONT_WEIGHT = {
-  ExtraBold: "font-extrabold",
+  Light:"font-light",
   Regular: "font-normal",
   SemiBold: "font-semibold",
+  ExtraBold: "font-extrabold",
 };

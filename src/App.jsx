@@ -1,8 +1,10 @@
+import { UserContextProvider } from "./contexts/UserContext";
 import Router from "./routes/route";
-
 
 export default function App() {
   return (
-    <Router/>
-  )
+    <UserContextProvider>
+      <Router />
+    </UserContextProvider>
+  );
 }

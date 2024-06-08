@@ -4,9 +4,10 @@ import facebook from "./assets/facebook-rounded-svgrepo-com.svg";
 import instagram from "./assets/instagram-rounded-svgrepo-com.svg";
 import twitter from "./assets/twitter-rounded-svgrepo-com.svg";
 import youtube from "./assets/youtube-rounded-svgrepo-com.svg";
+import user from "./assets/user-circle-svgrepo-com.svg";
 
 export function LogoRoastWhale({ width }) {
-  return  <img  style={{ width: `${width}px` }} src={logo} alt="logo" />;
+  return <img style={{ width: `${width}px` }} src={logo} alt="logo" />;
 }
 
 export function IconCart({ width }) {
@@ -33,3 +34,7 @@ export function IconYoutube({ width }) {
     <img style={{ width: `${width}px` }} src={youtube} alt="icon-youtube" />
   );
 }
+
+export const IconUser = ({ width }) => (
+  <img style={{ width: `${width}px` }} src={user} alt="icon-user" />
+);

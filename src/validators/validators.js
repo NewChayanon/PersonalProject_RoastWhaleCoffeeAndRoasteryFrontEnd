@@ -13,6 +13,12 @@ export const registerValidator = (input) => {
 };
 
 export const loginValidator = (input) => {
-  const { error } = loginSchema.validate(input);
-  console.log(error);
+  const { error } = loginSchema.validate(input, { abortEarly: false });
+  if (error) {
+    const result = error.details.reduce((acc, err) => {
+      acc[err.path] = err.message;
+      return acc;
+    }, {});
+    return result;
+  }
 };

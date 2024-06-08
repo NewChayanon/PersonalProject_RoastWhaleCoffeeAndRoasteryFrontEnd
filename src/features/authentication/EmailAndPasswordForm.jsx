@@ -1,12 +1,12 @@
 import Span from "../../components/Span";
 import Input from "../../components/Input";
 
-export default function EmailAndPasswordForm({ input, onChange, error }) {
+export default function EmailAndPasswordForm({title, input, onChange, error }) {
   return (
     <>
       <div className="py-10">
         <Span size={36} width="ExtraBold">
-          สมัครสมาชิก
+          {title}
         </Span>
       </div>
       <div className="w-full">

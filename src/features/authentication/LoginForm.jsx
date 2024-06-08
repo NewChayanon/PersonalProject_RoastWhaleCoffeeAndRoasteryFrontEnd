@@ -1,23 +1,57 @@
 import Span from "../../components/Span";
-import Input from "../../components/Input";
 import Button from "../../components/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import EmailAndPasswordForm from "./EmailAndPasswordForm";
+import { useState } from "react";
+import { loginValidator } from "../../validators/validators";
+import { useUser } from "../../hooks/useUser";
 
+const initialInput = {
+  email: "",
+  password: "",
+};
+const initialErrorMessage = {
+  email: "",
+  password: "",
+};
 export default function LoginForm() {
+  const [input, setInput] = useState(initialInput);
+  const [errorMessage, setErrorMessage] = useState(initialErrorMessage);
+  const { handleLogin } = useUser();
+  const navigate = useNavigate();
+
+  const handleChangeInput1 = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
+  const handleSubmitInput = async (e) => {
+    try {
+      e.preventDefault();
+      const error = loginValidator(input);
+      if (error) {
+        return setErrorMessage(error);
+      }
+      setErrorMessage(initialErrorMessage);
+      handleLogin(input);
+      navigate("/")
+
+      console.log(error);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="w-full min-h-screen flex justify-center items-center">
-      <div className="w-[40rem]  flex flex-col border p-5 rounded-xl gap-7 items-center">
-        <div className="py-10">
-          <Span size={36} width="ExtraBold">
-            เข้าสู่ระบบ
-          </Span>
-        </div>
-        <div className="w-full">
-          <Input placeholder="อีเมล" />
-        </div>
-        <div className="w-full">
-          <Input placeholder="รหัสผ่าน" />
-        </div>
+      <form
+        className="w-[40rem]  flex flex-col border p-5 rounded-xl gap-7 items-center"
+        onSubmit={handleSubmitInput}
+      >
+        <EmailAndPasswordForm
+          title="เข้าสู่ระบบ"
+          input={input}
+          onChange={handleChangeInput1}
+          error={errorMessage}
+        />
 
         <div className="flex justify-center bg-[#F9C06A] h-10 rounded-full w-full">
           <Button size={20} weight="SemiBold">
@@ -36,7 +70,7 @@ export default function LoginForm() {
             สมัครสมาชิก
           </Link>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

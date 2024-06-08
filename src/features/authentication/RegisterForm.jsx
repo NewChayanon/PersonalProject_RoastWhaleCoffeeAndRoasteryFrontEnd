@@ -45,7 +45,7 @@ export default function RegisterForm() {
       onSubmit={handleSubmitInput}
     >
       <form className="w-[40rem]  flex flex-col border p-5 rounded-xl gap-7 items-center">
-        <EmailAndPasswordForm input={input} onChange={handleChangeInput} error={errorMessage} />
+        <EmailAndPasswordForm title="สมัครสมาชิก" input={input} onChange={handleChangeInput} error={errorMessage} />
         <div className="w-full px-1">
           <Span width="Light" color="Neutra/500">
             * รหัสผ่านจะต้องมีตัวอักษรอย่างน้อย 8 ตัวอักษร

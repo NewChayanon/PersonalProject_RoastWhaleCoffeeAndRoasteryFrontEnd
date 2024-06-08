@@ -1,5 +1,7 @@
 export const BACKGROUND_COLOR = {
   "Primary/500": "bg-[#F9C06A]",
+  "Support02/200": "bg-[#FFD399]",
+  "Support02/500": "bg-[#FFF9F1]",
   none:""
 };
 

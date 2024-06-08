@@ -33,8 +33,6 @@ export default function LoginForm() {
       setErrorMessage(initialErrorMessage);
       handleLogin(input);
       navigate("/")
-
-      console.log(error);
     } catch (error) {
       console.log(error);
     }

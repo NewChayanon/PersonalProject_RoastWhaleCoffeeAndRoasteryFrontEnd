@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import logo from "./assets/coffee-beans-roast-brew-svgrepo-com.svg";
 import cart from "./assets/cart-large-minimalistic-svgrepo-com.svg";
 import facebook from "./assets/facebook-rounded-svgrepo-com.svg";
@@ -36,5 +37,5 @@ export function IconYoutube({ width }) {
 }
 
 export const IconUser = ({ width }) => (
-  <img style={{ width: `${width}px` }} src={user} alt="icon-user" />
+  <img style={{ width: `${width}px` }} src={user} alt="icon-user" className="rounded-full" />
 );

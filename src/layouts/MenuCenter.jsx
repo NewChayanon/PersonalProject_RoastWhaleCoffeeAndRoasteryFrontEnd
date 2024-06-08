@@ -6,7 +6,7 @@ const menuList = [
   { id: uuidv4(), title: "อุปกรณ์ทำกาแฟ", to:"/product-tools" },
 ];
 
-export default function Menu() {
+export default function MenuCenter() {
   return (
     <nav className="flex justify-center gap-16">
       {menuList.map((el) => (

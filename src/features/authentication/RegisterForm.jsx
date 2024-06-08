@@ -5,15 +5,21 @@ import EmailAndPasswordForm from "./EmailAndPasswordForm";
 import Input from "../../components/Input";
 import { useState } from "react";
 import authApi from "../../apis/auth";
-
+import { registerValidator } from "../../validators/validators";
 
 const initialInput = {
   email: "",
   password: "",
   confirmPassword: "",
 };
+const initialErrorMessage = {
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 export default function RegisterForm() {
   const [input, setInput] = useState(initialInput);
+  const [errorMessage, setErrorMessage] = useState(initialErrorMessage);
   const navigate = useNavigate();
   const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -21,6 +27,12 @@ export default function RegisterForm() {
   const handleSubmitInput = async (e) => {
     try {
       e.preventDefault();
+      const error = registerValidator(input);
+    
+      if (error) {
+        return setErrorMessage(error);
+      }
+      setErrorMessage(initialErrorMessage);
       await authApi.register(input);
       navigate("/logins");
     } catch (error) {
@@ -33,7 +45,7 @@ export default function RegisterForm() {
       onSubmit={handleSubmitInput}
     >
       <form className="w-[40rem]  flex flex-col border p-5 rounded-xl gap-7 items-center">
-        <EmailAndPasswordForm input={input} onChange={handleChangeInput} />
+        <EmailAndPasswordForm input={input} onChange={handleChangeInput} error={errorMessage} />
         <div className="w-full px-1">
           <Span width="Light" color="Neutra/500">
             * รหัสผ่านจะต้องมีตัวอักษรอย่างน้อย 8 ตัวอักษร
@@ -50,6 +62,7 @@ export default function RegisterForm() {
             value={input.confirmPassword}
             onChange={handleChangeInput}
             name="confirmPassword"
+            error={errorMessage.confirmPassword}
           />
         </div>
         <div className="flex justify-center bg-[#F9C06A] h-10 rounded-full w-full">

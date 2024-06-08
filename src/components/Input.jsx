@@ -1,4 +1,4 @@
-export default function Input({ type, placeholder, value, onChange, name }) {
+export default function Input({ type, placeholder, value, onChange, name, error }) {
   return (
     <div>
       <input
@@ -9,6 +9,7 @@ export default function Input({ type, placeholder, value, onChange, name }) {
         onChange={onChange}
         name={name}
       />
+      {error ? <small className="text-red-500 px-2">{error}</small> :null}
     </div>
   );
 }

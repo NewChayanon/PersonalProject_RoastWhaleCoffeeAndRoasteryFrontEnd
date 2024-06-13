@@ -1,16 +1,9 @@
 import { useUser } from "../../../hooks/useUser";
 import CartItemList from "./CartItemList";
 import CartTableColumn from "./CartTableColumn";
-import { v4 as uuidv4 } from "uuid";
 
-const ItemList = [
-  { id: uuidv4() },
-  { id: uuidv4() },
-  { id: uuidv4() },
-  { id: uuidv4() },
-  { id: uuidv4() },
-  { id: uuidv4() },
-];
+
+
 
 export default function CartTableContent() {
   const { cartUser } = useUser();
@@ -23,16 +16,16 @@ export default function CartTableContent() {
   return (
     <div className="w-[80rem]">
       <CartTableColumn />
-      {/* draft */}
-      {cartUser?.map((el,index) => (
+      
+      {cartUser?.map((el) => (
         <CartItemList
           key={el.id}
           cartItemId={el.id}
           productAndSizeId={el["product_and_size"].id}
-          name={cartUser?.[index]["product_and_size"].product.name}
-          description={cartUser?.[index]["product_and_size"].product.description}
-          price={cartUser?.[index]["product_and_size"].price}
-          quantity={cartUser?.[index].quantity}
+          name={el["product_and_size"].product.name}
+          description={el["product_and_size"].product.description}
+          price={el["product_and_size"].price}
+          quantity={el.quantity}
 
         />
       ))}

@@ -1,11 +1,15 @@
-import { Link } from "react-router-dom";
+
 import Button from "../components/Button";
 import Span from "../components/Span";
-import testImage from '../assets/Ethiopia-Citrus-Symphony-A3-600.jpg'
+import testImage from "../assets/Ethiopia-Citrus-Symphony-A3-600.jpg";
+import { useUser } from "../hooks/useUser";
 
-export default function ProductContainer() {
+export default function ProductContainer({id,name,description}) {
+  const { isUser } = useUser();
+  const {handleClickAddCoffeeToCart} = useUser()
+
   return (
-    <div className="max-w-[260px] max-h-[425px] p-3">
+    <div className="w-[260px] max-h-[425px] p-3">
       <div>
         {/* show-image */}
         <div>
@@ -16,17 +20,17 @@ export default function ProductContainer() {
         {/* product-description */}
         <div>
           <Span size={18} color="Support01/500" width="SemiBold">
-            Pa Miang
+            {name}
           </Span>
         </div>
-        <div>
+        <div className="h-14">
           <Span size={12} color="Support01/950" width="Regular">
-            Dark Chocolate, Prunes, Brown Sugar, Black Tea, Brown Spice, Honey
+            {description}
           </Span>
         </div>
-        <Link className=" h-10">
-          <Button>Add to cart</Button>
-        </Link>
+        <div className=" h-7" onClick={()=>handleClickAddCoffeeToCart(id)} >
+          <Button>{isUser?.["is_admin"] ? "Edit" : "Add to cart"}</Button>
+        </div>
       </div>
     </div>
   );

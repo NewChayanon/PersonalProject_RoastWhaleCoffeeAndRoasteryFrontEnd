@@ -1,7 +1,10 @@
 import Span from "../components/Span";
+import { useStock } from "../hooks/useStock";
 import ProductContainer from "./ProductContainer";
 
 export default function ProductRecommend({title}) {
+  const {newProduct} = useStock()
+  console.log(newProduct)
   return (
     <div>
         {/* wait map */}
@@ -10,10 +13,9 @@ export default function ProductRecommend({title}) {
           <Span>{title}</Span>
         </div>
         <div className="flex justify-center gap-5">
-          <ProductContainer />
-          <ProductContainer />
-          <ProductContainer />
-          <ProductContainer />
+
+          {newProduct?.map(el=><ProductContainer key={el.id} name={el.name} description={el.description}  />)}
+          
         </div>
       </div>
     </div>

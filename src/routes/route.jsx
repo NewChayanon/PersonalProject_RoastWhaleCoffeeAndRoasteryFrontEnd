@@ -8,6 +8,7 @@ import ToolPage from "../pages/ToolPage";
 import CartPage from "../pages/CartPage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
+import {StockContextProvider} from "../contexts/StockContext";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,8 @@ const router = createBrowserRouter([
     element: <MainContainer />,
     children: [
       { path: "/", element: <HomePage /> },
-      { path: "/product-coffees", element: <CoffeePage /> },
+      // { path: "users/:userId", element: <HomePage /> },
+      { path: "/product-coffees", element: <StockContextProvider><CoffeePage /></StockContextProvider> },
       { path: "/product-tools", element: <ToolPage /> },
       { path: "/carts", element: <CartPage /> },
     ],

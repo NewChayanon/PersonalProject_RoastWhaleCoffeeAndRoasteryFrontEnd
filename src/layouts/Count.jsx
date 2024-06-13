@@ -1,7 +1,7 @@
 import Button from "../components/Button";
 import Span from "../components/Span";
 
-export default function Count() {
+export default function Count({quantity}) {
   return (
     // draft
     <div className="border rounded-lg w-[5rem] flex justify-around">
@@ -9,7 +9,7 @@ export default function Count() {
         <Button bg="none">-</Button>
       </div>
       <div className="w-6 flex justify-center items-center border-x">
-        <Span>1</Span>
+        <Span>{quantity}</Span>
       </div>
       <div className="p-1 flex justify-center items-center">
         <Button bg="none">+</Button>

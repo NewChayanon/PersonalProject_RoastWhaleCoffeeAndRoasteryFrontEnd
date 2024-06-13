@@ -3,7 +3,7 @@ import Count from "../../../layouts/Count";
 
 
 
-export default function CartItemList() {
+export default function CartItemList({name,description,price,quantity}) {
   return (
     <div className="grid grid-cols-4">
       {/* draft */}
@@ -12,20 +12,21 @@ export default function CartItemList() {
           <img src="" alt="" />
         </div>
         <div>
-          <Span>Ethiopia Citrus Symphony</Span>
+          <Span>{name}</Span>
+          <br />
           <Span>
-            Lemon, Orange, White Flower, Bergamot, Lychee, Oolong Tea Finish
+            {description}
           </Span>
         </div>
       </div>
       <div>
-        <Span>{`฿ 260`}</Span>
+        <Span>{price}</Span>
       </div>
       <div>
-        <Count />
+        <Count quantity={quantity} />
       </div>
       <div>
-        <Span>{`฿ 260`}</Span>
+        <Span>{price*quantity}</Span>
       </div>
     </div>
   );

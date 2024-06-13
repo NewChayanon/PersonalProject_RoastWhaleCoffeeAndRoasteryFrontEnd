@@ -11,6 +11,6 @@
   box-sizing: border-box;
 }
 
-#root {
+#root,#modal {
   font-family: "Inter", "Kanit", sans-serif;
 }

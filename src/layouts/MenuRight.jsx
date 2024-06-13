@@ -22,7 +22,7 @@ export default function MenuRight() {
 
   const dropdownUser = [
     { id: uuidv4(), title: "User", width: "SemiBold" },
-    { id: uuidv4(), title: "รายการคำสั่งซื้อ" },
+    { id: uuidv4(), title: isUser?.["is_admin"] ? "ออเดอร์" : "รายการคำสั่งซื้อ" },
     {
       id: uuidv4(),
       title: "ล็อคเอาท์",
@@ -32,11 +32,10 @@ export default function MenuRight() {
       },
     },
   ];
-  console.log(isUser)
   return (
     <div className="flex">
       <Link to="/carts" className="flex mx-5">
-       {!isUser?.["is_admin"] && <IconCart width={30} />}
+        {!isUser?.["is_admin"] && <IconCart width={30} />}
       </Link>
       {isUser ? (
         <div

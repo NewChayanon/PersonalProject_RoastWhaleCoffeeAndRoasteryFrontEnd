@@ -31,8 +31,9 @@ export default function LoginForm() {
         return setErrorMessage(error);
       }
       setErrorMessage(initialErrorMessage);
-      handleLogin(input);
-      navigate("/")
+      const res = await handleLogin(input);
+      // navigate(`/users/${res.data.user.id}`)
+      navigate('/')
     } catch (error) {
       console.log(error);
     }

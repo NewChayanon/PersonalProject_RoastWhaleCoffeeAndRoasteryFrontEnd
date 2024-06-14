@@ -58,3 +58,10 @@ export const address = Joi.object({
   province: Joi.string().required(),
   postcode: Joi.string().required(),
 });
+
+export const payment = Joi.object({
+  image: Joi.string().required(),
+  date: Joi.string().required(),
+  hour: Joi.string().required(),
+  minute: Joi.string().required(),
+})

@@ -1,9 +1,13 @@
 import { useState } from "react";
 import Input from "../../../components/Input";
 import Span from "../../../components/Span";
-import { addressValidate } from "../../../validators/validators";
+import {
+  addressValidate,
+  paymentValidate,
+} from "../../../validators/validators";
 import Button from "../../../components/Button";
 import Bill from "./Bill";
+import { useUser } from "../../../hooks/useUser";
 
 const initialInput = {
   firstName: "",
@@ -25,25 +29,58 @@ const initialErrorMessage = {
   province: "",
   postcode: "",
 };
+const initialPayment = {
+  image: "",
+  date: "",
+  hour: "",
+  minute: "",
+};
+
+const initialPaymentError = {
+  image: "",
+  date: "",
+  hour: "",
+  minute: "",
+};
 
 export default function CheckOutForm() {
   const [input, setInput] = useState(initialInput);
   const [errorMessage, setErrorMessage] = useState(initialErrorMessage);
+  const [payment, setPayment] = useState(initialPayment);
+  const [errorMessagePayment, setErrorMessagePayment] =
+    useState(initialPaymentError);
+    const {isUser}=useUser()
 
-  const handleChangeInput = (e) => {
+  const handleChangeInput = (e) =>
     setInput({ ...input, [e.target.name]: e.target.value });
-  };
+
+  const handlePaymentInput = (e) =>
+    setPayment({ ...payment, [e.target.name]: e.target.value });
 
   const handleSubmitForm = async (e) => {
     try {
       e.preventDefault();
-      console.log("first");
-      const error = addressValidate(input);
-      if (error) {
-        return setErrorMessage(error);
+
+      const errorAddress = addressValidate(input);
+      const errorPayment = paymentValidate(payment);
+
+      console.log(errorAddress)
+      console.log(errorPayment)
+
+
+      if (errorAddress || errorPayment) {
+        if(errorAddress){
+          setErrorMessage(errorAddress);
+        }
+        setErrorMessage(initialErrorMessage);
+        if (errorPayment) {
+          setErrorMessagePayment(errorPayment)
+        }
+        return
       }
 
       setErrorMessage(initialErrorMessage);
+      setErrorMessagePayment(initialPaymentError)
       //   await addProductCoffee(input)
     } catch (error) {
       console.log(error);
@@ -60,8 +97,8 @@ export default function CheckOutForm() {
           <div>
             <Span>รายละเอียดลูกค้า</Span>
             <div>
-              <Span>อีเมล *</Span>
-              <Span>new@1mail.com</Span>
+              <Span>อีเมล : </Span>
+              <Span>{isUser?.email}</Span>
             </div>
             <div>
               <Span>ชื่อ *</Span>
@@ -157,14 +194,69 @@ export default function CheckOutForm() {
           </div>
           <div>
             <Span>ช่องทางชำระเงิน</Span>
+            <div className="bg-gray-300 w-auto h-40 p-2 ">
+              <div>
+                <div></div>
+                <div>
+                  <Span>ชื่อ : นาย ชญานนท์ นิลปานะ</Span>
+                  <br />
+                  <Span>บัญชี : xxx-x-xxxxx-x</Span>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <div>
+                  <Span>แนบสลิป *</Span>
+                  <Input
+                    type="text"
+                    placeholder="แนบสลิป"
+                    value={payment.image}
+                    onChange={handlePaymentInput}
+                    name="image"
+                    error={errorMessagePayment.image}
+                  />
+                </div>
+                <div>
+                  <Span>วันที่ชำระ *</Span>
+                  <Input
+                    type="text"
+                    placeholder="วันที่ชำระ"
+                    value={payment.date}
+                    onChange={handlePaymentInput}
+                    name="date"
+                    error={errorMessagePayment.date}
+                  />
+                </div>
+                <div>
+                  <Span>เวลาที่ชำระ *</Span>
+                  <div className="flex gap-3 items-center">
+                    <Input
+                      type="text"
+                      placeholder="ชั่วโมง"
+                      value={payment.hour}
+                      onChange={handlePaymentInput}
+                      name="hour"
+                      error={errorMessagePayment.hour}
+                    />{" "}
+                    <Span>:</Span>{" "}
+                    <Input
+                      type="text"
+                      placeholder="นาที"
+                      value={payment.minute}
+                      onChange={handlePaymentInput}
+                      name="minute"
+                      error={errorMessagePayment.minute}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div className="h-7">
           <Button>สั่งซื้อสินค้า</Button>
         </div>
       </form>
-
-      <Bill/>
+      <Bill />
     </div>
   );
 }

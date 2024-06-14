@@ -1,6 +1,6 @@
 
 import { loginSchema, registerSchema } from "./auth-validator";
-import { addCoffeeProduct, address, validateCoffee } from "./stock-validator";
+import { addCoffeeProduct, address, validateCoffee,payment } from "./stock-validator";
 
 export const registerValidator = (input) => {
   const { error } = registerSchema.validate(input, { abortEarly: false });
@@ -45,6 +45,18 @@ export const handleValidateCoffee = (input) =>{
 
 export const addressValidate = (input)=>{
   const { error } = address.validate(input, { abortEarly: false });
+  if (error) {
+    const result = error.details.reduce((acc, err) => {
+      acc[err.path[0]] = err.message;
+
+      return acc;
+    }, {});
+    return result;
+  }
+}
+
+export const paymentValidate = (paymentInput) => {
+  const { error } = payment.validate(paymentInput, { abortEarly: false });
   if (error) {
     const result = error.details.reduce((acc, err) => {
       acc[err.path[0]] = err.message;

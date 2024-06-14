@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 export default function Input({ type, placeholder, value, onChange, name, error }) {
   
   return (

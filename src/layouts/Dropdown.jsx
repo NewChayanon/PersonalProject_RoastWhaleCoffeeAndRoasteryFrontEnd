@@ -15,7 +15,7 @@ export default function Dropdown({ item }) {
           onClick={el.onClick}
           role="button"
         >
-          <Link>
+          <Link to={el.to}>
             <Span width={el.width}>{el.title}</Span>
           </Link>
         </div>

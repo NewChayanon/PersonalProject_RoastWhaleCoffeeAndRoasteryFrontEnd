@@ -4,7 +4,6 @@ import Button from "../../../components/Button";
 import Input from "../../../components/Input";
 import Span from "../../../components/Span";
 import { addCoffeeProductValidator, handleValidateCoffee } from "../../../validators/validators";
-import stockApi from "../../../apis/stock";
 import { useStock } from "../../../hooks/useStock";
 
 

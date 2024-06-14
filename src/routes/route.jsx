@@ -10,7 +10,7 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import { StockContextProvider } from "../contexts/StockContext";
 import CheckOutPage from "../pages/ChackOutPage";
-
+import StatusOrderUserPage from "../pages/StatusOrderUserPage";
 
 const router = createBrowserRouter([
   {
@@ -31,12 +31,13 @@ const router = createBrowserRouter([
         path: "/product-tools",
         element: (
           <StockContextProvider>
-            <ToolPage />{" "}
+            <ToolPage />
           </StockContextProvider>
         ),
       },
       { path: "/carts", element: <CartPage /> },
-      {path:"/check-out",element:<CheckOutPage/>}
+      { path: "/check-out", element: <CheckOutPage /> },
+      { path: "/order-status", element: <StatusOrderUserPage /> },
     ],
   },
   { path: "/logins", element: <LoginPage /> },

@@ -6,16 +6,14 @@ import {
   removeAccessToken,
   setAccessToken,
 } from "../utils/local-storage";
-import { useNavigate } from "react-router-dom";
 
 export const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
   const [isUser, setIsUser] = useState(null);
   const [cartUser, setCartUser] = useState(null);
+  const [shoppingList, setShoppingList] = useState(null);
   const [res, setRes] = useState();
-  
-  
 
   const handleLogin = async (credentials) => {
     const res = await userApi.Login(credentials);
@@ -26,6 +24,7 @@ export const UserContextProvider = ({ children }) => {
     setRes(res.data);
     return getUser;
   };
+
   const handleLogout = () => {
     removeAccessToken();
     setIsUser(null);
@@ -44,6 +43,7 @@ export const UserContextProvider = ({ children }) => {
     const res = await userApi.addAndUpdateProduct(productAndSizeId, body);
     setRes(res.data);
   };
+
   const handleDecrementProductInCart = async (
     productAndSizeId,
     quantity,
@@ -61,23 +61,25 @@ export const UserContextProvider = ({ children }) => {
 
   const handleAllDeleteInCart = () => {
     cartUser.map(async (el) => {
-      const res =  await userApi.deleteProductInCart(el.id);
+      const res = await userApi.deleteProductInCart(el.id);
       setRes(res);
     });
   };
 
-  const checkOutCart = async (input,payment) => {
-    console.log(input,payment)
-    const resAddress = await userApi.address(input)
-    const resPayment = await userApi.payment(payment)
+  const checkOutCart = async (input, payment) => {
+    console.log(input, payment);
+    const resAddress = await userApi.address(input);
+    const resPayment = await userApi.payment(payment);
     setRes(resAddress);
     setRes(resPayment);
-  }
+  };
 
   useEffect(() => {
     const fetchCartUser = async () => {
       const resCartUser = await userApi.cartUser();
       setCartUser(resCartUser.data);
+      const resShoppingList = await userApi.getShoppingList();
+      setShoppingList(resShoppingList.data);
     };
     fetchCartUser();
   }, [res]);
@@ -90,6 +92,8 @@ export const UserContextProvider = ({ children }) => {
           setIsUser(res.data.user);
           const resCartUser = await userApi.cartUser();
           setCartUser(resCartUser.data);
+          const resShoppingList = await userApi.getShoppingList();
+          setShoppingList(resShoppingList.data);
         }
       } catch (error) {
         console.log(error);
@@ -97,7 +101,7 @@ export const UserContextProvider = ({ children }) => {
     };
     fetchUser();
   }, []);
-
+  
   return (
     <UserContext.Provider
       value={{
@@ -109,7 +113,8 @@ export const UserContextProvider = ({ children }) => {
         handleIncrementProductInCart,
         handleDecrementProductInCart,
         handleAllDeleteInCart,
-        checkOutCart
+        checkOutCart,
+        shoppingList,
       }}
     >
       {children}

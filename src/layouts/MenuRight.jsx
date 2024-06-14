@@ -22,7 +22,11 @@ export default function MenuRight() {
 
   const dropdownUser = [
     { id: uuidv4(), title: isUser?.["email"], width: "SemiBold" },
-    { id: uuidv4(), title: isUser?.["is_admin"] ? "ออเดอร์" : "รายการคำสั่งซื้อ" },
+    {
+      id: uuidv4(),
+      title: isUser?.["is_admin"] ? "ออเดอร์" : "รายการคำสั่งซื้อ",
+      to: isUser?.["is_admin"] ? "ออเดอร์" : "/order-status",
+    },
     {
       id: uuidv4(),
       title: "ล็อคเอาท์",
@@ -32,7 +36,7 @@ export default function MenuRight() {
       },
     },
   ];
-  
+
   return (
     <div className="flex">
       <Link to="/carts" className="flex mx-5">

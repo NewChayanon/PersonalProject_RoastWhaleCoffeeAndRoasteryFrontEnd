@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Button from "../components/Button";
 import Span from "../components/Span";
 import testImage from "../assets/Ethiopia-Citrus-Symphony-A3-600.jpg";

@@ -11,7 +11,7 @@ export default function CartItemList({
   quantity,
 }) {
   return (
-    <div className="grid grid-cols-4">
+    <div className="grid grid-cols-4 border-t-2">
       <div>
         <div>
           <img src="" alt="" />

@@ -22,4 +22,7 @@ userApi.address = (body) =>
 userApi.payment = (body) =>
   axios.post(`http://localhost:8888/users/check-out`, body);
 
+userApi.getShoppingList = () =>
+  axios.get(`http://localhost:8888/users/shopping-list`);
+
 export default userApi;

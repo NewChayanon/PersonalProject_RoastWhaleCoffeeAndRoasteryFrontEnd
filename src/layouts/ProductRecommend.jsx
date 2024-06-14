@@ -17,6 +17,7 @@ export default function ProductRecommend({ title }) {
           {newProduct?.map((el) => (
             <ProductContainer
               key={el.id}
+              id={el.id}
               name={el.name}
               description={el.description}
             />

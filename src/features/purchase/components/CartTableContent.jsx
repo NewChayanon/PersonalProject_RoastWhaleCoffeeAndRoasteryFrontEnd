@@ -27,6 +27,7 @@ export default function CartTableContent() {
           description={el["product_and_size"].product.description}
           price={el["product_and_size"].price}
           quantity={el.quantity}
+          
         />
       ))}
     </div>

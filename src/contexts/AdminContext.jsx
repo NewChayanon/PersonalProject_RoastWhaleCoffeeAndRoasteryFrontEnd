@@ -7,9 +7,9 @@ export const AdminContext = createContext();
 
 export default function AdminContextProvider({ children }) {
   const [order, setOrder] = useState(null);
+  const [res, setRes] = useState(null);
   const { isUser } = useUser();
 
-  //   {id:"",name:"",description:"",first_name:"",last_name:"",address:"",price:"",image:"",status:""}
   const prepareOrder = order?.map((el) => {
     const obj = {};
     const initialValue = { price: 0 };
@@ -39,6 +39,25 @@ export default function AdminContextProvider({ children }) {
   });
   console.log(prepareOrder);
 
+  const handlePending = async (id) => {
+    console.log(id);
+    const body = { status: "PENDING" };
+    const res = await adminApi.updateStatusOrder(id, body);
+    setRes(res.data)
+  };
+  const handSuccess = async (id) => {
+    console.log(id);
+    const body = { status: "SUCCESSED" };
+    const res = await adminApi.updateStatusOrder(id, body);
+    setRes(res.data)
+  };
+  const handFailed = async (id) => {
+    console.log(id);
+    const body = { status: "FAILED" };
+    const res = await adminApi.updateStatusOrder(id, body);
+    setRes(res.data)
+  };
+
   useEffect(() => {
     const fetchAllOrder = async () => {
       if (isUser?.["is_admin"]) {
@@ -49,10 +68,12 @@ export default function AdminContextProvider({ children }) {
       }
     };
     fetchAllOrder();
-  }, [isUser]);
+  }, [isUser, res]);
 
   return (
-    <AdminContext.Provider value={{ prepareOrder }}>
+    <AdminContext.Provider
+      value={{ prepareOrder, handlePending, handSuccess, handFailed }}
+    >
       {children}
     </AdminContext.Provider>
   );

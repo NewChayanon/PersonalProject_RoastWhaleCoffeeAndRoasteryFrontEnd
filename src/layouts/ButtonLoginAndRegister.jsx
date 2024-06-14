@@ -4,7 +4,7 @@ import Button from "../components/Button";
 
 export default function ButtonLoginAndRegister({ item }) {
   return (
-    <div>
+    <div className="flex">
       {item.map((el) => (
         <Link
           key={el.id}

@@ -26,8 +26,18 @@ export default function ProductContainer({ id, name, description }) {
             {description}
           </Span>
         </div>
-        <div className=" h-7" onClick={() => handleClickAddCoffeeToCart(id)}>
-          <Button>{isUser?.["is_admin"] ? "Edit" : "Add to cart"}</Button>
+        <div className=" h-7">
+          <Button>
+            {isUser?.["is_admin"] ? (
+              <div>
+                <Span>Edit</Span>
+              </div>
+            ) : (
+              <div onClick={() => handleClickAddCoffeeToCart(id)}>
+                <Span>Add to cart</Span>
+              </div>
+            )}
+          </Button>
         </div>
       </div>
     </div>

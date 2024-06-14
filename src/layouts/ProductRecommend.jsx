@@ -1,21 +1,26 @@
+/* eslint-disable react/prop-types */
 import Span from "../components/Span";
 import { useStock } from "../hooks/useStock";
 import ProductContainer from "./ProductContainer";
 
-export default function ProductRecommend({title}) {
-  const {newProduct} = useStock()
-  console.log(newProduct)
+export default function ProductRecommend({ title }) {
+  const { newProduct } = useStock();
+  console.log(newProduct);
   return (
     <div>
-        {/* wait map */}
+      {/* wait map */}
       <div>
         <div className="flex justify-center">
           <Span>{title}</Span>
         </div>
         <div className="flex justify-center gap-5">
-
-          {newProduct?.map(el=><ProductContainer key={el.id} name={el.name} description={el.description}  />)}
-          
+          {newProduct?.map((el) => (
+            <ProductContainer
+              key={el.id}
+              name={el.name}
+              description={el.description}
+            />
+          ))}
         </div>
       </div>
     </div>

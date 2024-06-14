@@ -8,7 +8,9 @@ import ToolPage from "../pages/ToolPage";
 import CartPage from "../pages/CartPage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
-import {StockContextProvider} from "../contexts/StockContext";
+import { StockContextProvider } from "../contexts/StockContext";
+import CheckOutPage from "../pages/ChackOutPage";
+
 
 const router = createBrowserRouter([
   {
@@ -17,13 +19,28 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <HomePage /> },
       // { path: "users/:userId", element: <HomePage /> },
-      { path: "/product-coffees", element: <StockContextProvider><CoffeePage /></StockContextProvider> },
-      { path: "/product-tools", element: <ToolPage /> },
+      {
+        path: "/product-coffees",
+        element: (
+          <StockContextProvider>
+            <CoffeePage />
+          </StockContextProvider>
+        ),
+      },
+      {
+        path: "/product-tools",
+        element: (
+          <StockContextProvider>
+            <ToolPage />{" "}
+          </StockContextProvider>
+        ),
+      },
       { path: "/carts", element: <CartPage /> },
+      {path:"/check-out",element:<CheckOutPage/>}
     ],
   },
   { path: "/logins", element: <LoginPage /> },
-  { path: "/registers", element: <RegisterPage/> },
+  { path: "/registers", element: <RegisterPage /> },
 ]);
 
 export default function Router() {

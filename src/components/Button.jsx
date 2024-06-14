@@ -15,7 +15,7 @@ export default function Button({
   children,
 }) {
   return (
-    <button
+    <button type="submit"
       className={`${BACKGROUND_COLOR[bg]} ${TEXT_COLOR[color]} ${FONT_WEIGHT[weight]} ${TEXT_SIZE[size]} w-full rounded-lg h-full `}
     >
       {children}

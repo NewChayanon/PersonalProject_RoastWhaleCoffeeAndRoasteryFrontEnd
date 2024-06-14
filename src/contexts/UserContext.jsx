@@ -14,7 +14,6 @@ export const UserContextProvider = ({ children }) => {
   const [cartUser, setCartUser] = useState(null);
   const [res, setRes] = useState();
 
-  
   const handleLogin = async (credentials) => {
     const res = await userApi.Login(credentials);
     // setToken
@@ -42,15 +41,26 @@ export const UserContextProvider = ({ children }) => {
     const res = await userApi.addAndUpdateProduct(productAndSizeId, body);
     setRes(res.data);
   };
-  const handleDecrementProductInCart = async (productAndSizeId, quantity, cartItemId) => {
+  const handleDecrementProductInCart = async (
+    productAndSizeId,
+    quantity,
+    cartItemId
+  ) => {
     quantity--;
     if (quantity <= 0) {
-      const res = await userApi.deleteProductInCart(cartItemId)
+      const res = await userApi.deleteProductInCart(cartItemId);
       return setRes(res.data);
     }
     let body = { quantity };
     const res = await userApi.addAndUpdateProduct(productAndSizeId, body);
     setRes(res.data);
+  };
+
+  const handleAllDeleteInCart = () => {
+    cartUser.map(async (el) => {
+      const res =  await userApi.deleteProductInCart(el.id);
+      setRes(res);
+    });
   };
 
   useEffect(() => {
@@ -87,6 +97,7 @@ export const UserContextProvider = ({ children }) => {
         cartUser,
         handleIncrementProductInCart,
         handleDecrementProductInCart,
+        handleAllDeleteInCart,
       }}
     >
       {children}

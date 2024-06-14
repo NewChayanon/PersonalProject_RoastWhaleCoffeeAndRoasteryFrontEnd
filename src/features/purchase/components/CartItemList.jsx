@@ -1,12 +1,17 @@
+/* eslint-disable react/prop-types */
 import Span from "../../../components/Span";
 import Count from "../../../layouts/Count";
 
-
-
-export default function CartItemList({cartItemId,productAndSizeId,name,description,price,quantity}) {
+export default function CartItemList({
+  cartItemId,
+  productAndSizeId,
+  name,
+  description,
+  price,
+  quantity,
+}) {
   return (
     <div className="grid grid-cols-4">
-      {/* draft */}
       <div>
         <div>
           <img src="" alt="" />
@@ -14,19 +19,21 @@ export default function CartItemList({cartItemId,productAndSizeId,name,descripti
         <div>
           <Span>{name}</Span>
           <br />
-          <Span>
-            {description}
-          </Span>
+          <Span>{description}</Span>
         </div>
       </div>
       <div>
-        <Span>{price}</Span>
+        <Span>{`฿ ${price.toFixed(2)}`}</Span>
       </div>
       <div>
-        <Count cartItemId={cartItemId} productAndSizeId={productAndSizeId} quantity={quantity} />
+        <Count
+          cartItemId={cartItemId}
+          productAndSizeId={productAndSizeId}
+          quantity={quantity}
+        />
       </div>
       <div>
-        <Span>{price*quantity}</Span>
+        <Span>{`฿ ${(price * quantity).toFixed(2)}`}</Span>
       </div>
     </div>
   );

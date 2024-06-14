@@ -26,7 +26,7 @@ export const validateCoffee = (coffeeArray) => {
   const errorValidatorCoffee = coffeeArray.map((item) => {
     let itemErrors = { price: "", stock: "" };
 
-    itemErrors.size = item.size
+    itemErrors.size = item.size;
     if (!item.price) {
       isValid = false;
       itemErrors.price = "Price is required";
@@ -47,3 +47,14 @@ export const validateCoffee = (coffeeArray) => {
 
   return { isValid, errorValidatorCoffee };
 };
+
+export const address = Joi.object({
+  firstName: Joi.string().required(),
+  lastName: Joi.string().required(),
+  mobile: Joi.string().required(),
+  country: Joi.string().required(),
+  address: Joi.string().required(),
+  district: Joi.string().required(),
+  province: Joi.string().required(),
+  postcode: Joi.string().required(),
+});

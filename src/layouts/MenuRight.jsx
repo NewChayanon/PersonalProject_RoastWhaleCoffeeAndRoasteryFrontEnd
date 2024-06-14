@@ -21,7 +21,7 @@ export default function MenuRight() {
   const navigate = useNavigate();
 
   const dropdownUser = [
-    { id: uuidv4(), title: "User", width: "SemiBold" },
+    { id: uuidv4(), title: isUser?.["email"], width: "SemiBold" },
     { id: uuidv4(), title: isUser?.["is_admin"] ? "ออเดอร์" : "รายการคำสั่งซื้อ" },
     {
       id: uuidv4(),
@@ -32,6 +32,7 @@ export default function MenuRight() {
       },
     },
   ];
+  
   return (
     <div className="flex">
       <Link to="/carts" className="flex mx-5">

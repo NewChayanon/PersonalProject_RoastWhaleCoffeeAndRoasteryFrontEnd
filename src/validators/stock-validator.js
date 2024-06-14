@@ -49,14 +49,18 @@ export const validateCoffee = (coffeeArray) => {
 };
 
 export const address = Joi.object({
-  firstName: Joi.string().required(),
-  lastName: Joi.string().required(),
-  mobile: Joi.string().required(),
-  country: Joi.string().required(),
-  address: Joi.string().required(),
-  district: Joi.string().required(),
-  province: Joi.string().required(),
-  postcode: Joi.string().required(),
+  firstName: Joi.string().required().trim(),
+  lastName: Joi.string().required().trim(),
+  mobile: Joi.string()
+    .required()
+    .pattern(/^[0-9]{10}$/),
+  country: Joi.string().required().trim(),
+  address: Joi.string().required().trim(),
+  district: Joi.string().required().trim(),
+  province: Joi.string().required().trim(),
+  postcode: Joi.string()
+    .required()
+    .pattern(/^[0-9]{5}$/),
 });
 
 export const payment = Joi.object({
@@ -64,4 +68,4 @@ export const payment = Joi.object({
   date: Joi.string().required(),
   hour: Joi.string().required(),
   minute: Joi.string().required(),
-})
+});

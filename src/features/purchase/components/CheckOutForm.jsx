@@ -8,6 +8,7 @@ import {
 import Button from "../../../components/Button";
 import Bill from "./Bill";
 import { useUser } from "../../../hooks/useUser";
+import { useNavigate } from "react-router-dom";
 
 const initialInput = {
   firstName: "",
@@ -49,7 +50,9 @@ export default function CheckOutForm() {
   const [payment, setPayment] = useState(initialPayment);
   const [errorMessagePayment, setErrorMessagePayment] =
     useState(initialPaymentError);
-    const {isUser}=useUser()
+  const { isUser, checkOutCart } = useUser();
+
+  const navigator = useNavigate();
 
   const handleChangeInput = (e) =>
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -64,24 +67,26 @@ export default function CheckOutForm() {
       const errorAddress = addressValidate(input);
       const errorPayment = paymentValidate(payment);
 
-      console.log(errorAddress)
-      console.log(errorPayment)
-
-
       if (errorAddress || errorPayment) {
-        if(errorAddress){
+        if (errorAddress) {
           setErrorMessage(errorAddress);
         }
-        setErrorMessage(initialErrorMessage);
-        if (errorPayment) {
-          setErrorMessagePayment(errorPayment)
+        if (!errorAddress) {
+          setErrorMessage(initialErrorMessage);
         }
-        return
+        if (errorPayment) {
+          setErrorMessagePayment(errorPayment);
+        }
+        if (!errorPayment) {
+          setErrorMessagePayment(initialPaymentError);
+        }
+        return;
       }
 
       setErrorMessage(initialErrorMessage);
-      setErrorMessagePayment(initialPaymentError)
-      //   await addProductCoffee(input)
+      setErrorMessagePayment(initialPaymentError);
+      navigator("/");
+      await checkOutCart(input, payment);
     } catch (error) {
       console.log(error);
     }

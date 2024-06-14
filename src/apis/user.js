@@ -1,4 +1,3 @@
-
 import axios from "../config/axios";
 
 const userApi = {};
@@ -16,6 +15,11 @@ userApi.addAndUpdateProduct = (productAndSizeId, body) =>
   axios.post(`http://localhost:8888/add-product/${productAndSizeId}`, body);
 
 userApi.deleteProductInCart = (cartItemId) =>
-  axios.delete (`http://localhost:8888/users/remove/${cartItemId}`);
+  axios.delete(`http://localhost:8888/users/remove/${cartItemId}`);
+
+userApi.address = (body) =>
+  axios.post(`http://localhost:8888/users/address`, body);
+userApi.payment = (body) =>
+  axios.post(`http://localhost:8888/users/check-out`, body);
 
 export default userApi;

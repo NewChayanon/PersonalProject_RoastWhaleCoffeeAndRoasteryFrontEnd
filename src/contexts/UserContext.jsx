@@ -6,6 +6,7 @@ import {
   removeAccessToken,
   setAccessToken,
 } from "../utils/local-storage";
+import { useNavigate } from "react-router-dom";
 
 export const UserContext = createContext();
 
@@ -13,6 +14,8 @@ export const UserContextProvider = ({ children }) => {
   const [isUser, setIsUser] = useState(null);
   const [cartUser, setCartUser] = useState(null);
   const [res, setRes] = useState();
+  
+  
 
   const handleLogin = async (credentials) => {
     const res = await userApi.Login(credentials);
@@ -63,6 +66,14 @@ export const UserContextProvider = ({ children }) => {
     });
   };
 
+  const checkOutCart = async (input,payment) => {
+    console.log(input,payment)
+    const resAddress = await userApi.address(input)
+    const resPayment = await userApi.payment(payment)
+    setRes(resAddress);
+    setRes(resPayment);
+  }
+
   useEffect(() => {
     const fetchCartUser = async () => {
       const resCartUser = await userApi.cartUser();
@@ -98,6 +109,7 @@ export const UserContextProvider = ({ children }) => {
         handleIncrementProductInCart,
         handleDecrementProductInCart,
         handleAllDeleteInCart,
+        checkOutCart
       }}
     >
       {children}

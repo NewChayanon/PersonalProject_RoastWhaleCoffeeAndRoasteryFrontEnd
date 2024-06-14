@@ -15,7 +15,7 @@ const LoginAndRegisterList = [
 
 export default function MenuRight() {
   const [open, setOpen] = useState(false);
-
+  
   const { isUser, handleLogout } = useUser();
 
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ export default function MenuRight() {
     {
       id: uuidv4(),
       title: isUser?.["is_admin"] ? "ออเดอร์" : "รายการคำสั่งซื้อ",
-      to: isUser?.["is_admin"] ? "ออเดอร์" : "/order-status",
+      to: isUser?.["is_admin"] ? "/order" : "/shopping-list",
     },
     {
       id: uuidv4(),

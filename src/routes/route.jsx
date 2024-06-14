@@ -11,6 +11,7 @@ import RegisterPage from "../pages/RegisterPage";
 import { StockContextProvider } from "../contexts/StockContext";
 import CheckOutPage from "../pages/ChackOutPage";
 import StatusOrderUserPage from "../pages/StatusOrderUserPage";
+import OrderPage from "../pages/OrderPage";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,6 @@ const router = createBrowserRouter([
     element: <MainContainer />,
     children: [
       { path: "/", element: <HomePage /> },
-      // { path: "users/:userId", element: <HomePage /> },
       {
         path: "/product-coffees",
         element: (
@@ -37,7 +37,8 @@ const router = createBrowserRouter([
       },
       { path: "/carts", element: <CartPage /> },
       { path: "/check-out", element: <CheckOutPage /> },
-      { path: "/order-status", element: <StatusOrderUserPage /> },
+      { path: "/shopping-list", element: <StatusOrderUserPage /> },
+      { path: "/order", element: <OrderPage /> },
     ],
   },
   { path: "/logins", element: <LoginPage /> },

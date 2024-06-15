@@ -44,7 +44,7 @@ export default function EditProductCoffee({ onSuccess, item, category }) {
       price: category == "tool" ? +item["product_and_size"][0].price : 0,
       stock: category == "tool" ? item["product_and_size"][0].stock : 0,
     },
-    image: [{ image: "z," }, { image: "s," }],
+    
   };
 
   const initialErrorMessage = {
@@ -59,7 +59,7 @@ export default function EditProductCoffee({ onSuccess, item, category }) {
       { size: "FIVE_HUNDRED", price: "", stock: "" },
     ],
     tool: { size: "TOOL", price: "", stock: "" },
-    image: [{ image: "z," }, { image: "s," }],
+    
     "coffee[0].price": "",
     "coffee[0].stock": "",
     "coffee[1].price": "",
@@ -71,6 +71,7 @@ export default function EditProductCoffee({ onSuccess, item, category }) {
     "tool.stock": "",
   };
   const [input, setInput] = useState(initialInput);
+  const [file, setFile] = useState(null);
   const [errorMessage, setErrorMessage] = useState(initialErrorMessage);
   const { handleEditCoffeeProduct, handleDeleteCoffee } = useStock();
 
@@ -104,7 +105,7 @@ export default function EditProductCoffee({ onSuccess, item, category }) {
         return setErrorMessage(error);
       }
       setErrorMessage(initialErrorMessage);
-      await handleEditCoffeeProduct(input);
+      await handleEditCoffeeProduct(input,file);
       onSuccess();
     } catch (error) {
       console.log(error);
@@ -238,7 +239,14 @@ export default function EditProductCoffee({ onSuccess, item, category }) {
 
       <div>
         <Span>รูปภาพ</Span>
-        <Input />
+        <input
+        type="file"
+        onChange={e => {
+          if (e.target.files[0]) {
+            setFile(e.target.files[0]);
+          }
+        }}
+      />
       </div>
 
       <div className="flex h-9 justify-between">

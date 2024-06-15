@@ -8,11 +8,11 @@ import Modal from "../components/Modal";
 import EditProductCoffee from "../features/admin/EditProductCoffee";
 import { BACKGROUND_COLOR } from "../constants/InfoFigma";
 
-export default function ProductContainer({ id, name, description, item ,category }) {
+export default function ProductContainer({ id, name, description, item ,category,src }) {
   const [open, setOpen] = useState(false);
   const { isUser } = useUser();
   const { handleClickAddCoffeeToCart } = useUser();
-
+  console.log(src)
   // lowest price
   const lowestPrice = item?.["product_and_size"].reduce(
     (acc, crr) => {
@@ -28,7 +28,8 @@ export default function ProductContainer({ id, name, description, item ,category
     <div className="w-[260px] max-h-[425px] p-3">
       <div>
         <div className="relative">
-          <img src={testImage} alt="test-image" />
+          <img src={ src ? `http://localhost:8888/${src.image}` : testImage} alt="test-image" />
+          
           <div
             className={`absolute top-2 right-4 ${BACKGROUND_COLOR["Support02/500"]} py-1 px-2 rounded-md`}
           >

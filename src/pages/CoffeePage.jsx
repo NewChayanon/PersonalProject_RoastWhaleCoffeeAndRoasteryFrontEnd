@@ -37,6 +37,7 @@ export default function CoffeePage() {
             description={el.description}
             item={el}
             category="coffee"
+            src={el.image[0]}
           />
         ))}
 

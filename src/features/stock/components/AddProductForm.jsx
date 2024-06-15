@@ -38,7 +38,7 @@ export default function AddProductForm({ onSuccess, category }) {
       price: category == "tool" ? "" : 0,
       stock: category == "tool" ? "" : 0,
     },
-    image: [{ image: "z," }, { image: "s," }],
+  
   };
 
   const initialErrorMessage = {
@@ -53,14 +53,16 @@ export default function AddProductForm({ onSuccess, category }) {
     "coffee[1].stock": "",
     "coffee[2].price": "",
     "coffee[2].stock": "",
-    "tool.size":"",
-    "tool.price":"",
-    "tool.stock":"",
-    image: [{ image: "z," }, { image: "s," }],
+    "tool.size": "",
+    "tool.price": "",
+    "tool.stock": "",
+ 
   };
 
   const [input, setInput] = useState(initialInput);
   const [errorMessage, setErrorMessage] = useState(initialErrorMessage);
+  const [file, setFile] = useState(null);
+  const [errorMessageFile,setErrorMessageFile]=useState("")
   const { addProductCoffee } = useStock();
 
   const handleChangeInput = (e) => {
@@ -83,18 +85,29 @@ export default function AddProductForm({ onSuccess, category }) {
   };
 
   const handleSubmitForm = async (e) => {
-    try {
-      console.log(input);
+    try {      
       e.preventDefault();
       const error = addCoffeeProductValidator(input);
       const { errorValidatorCoffee } = handleValidateCoffee(input);
-      console.log(error);
-      if (error) {
-        error.coffee = errorValidatorCoffee;
-        return setErrorMessage(error);
+    
+      if (!file || error) {
+        if (error) {
+          error.coffee = errorValidatorCoffee;
+          setErrorMessage(error);
+        }else{
+          setErrorMessage(initialErrorMessage)
+        }
+        
+        if (!file) {  
+          setErrorMessageFile("file is not allowed to be empty")
+        } else{
+          setErrorMessageFile("")
+        }
+        return 
       }
+      setErrorMessageFile("")
       setErrorMessage(initialErrorMessage);
-      await addProductCoffee(input);
+      await addProductCoffee(input, file);
       onSuccess();
     } catch (error) {
       console.log(error);
@@ -216,6 +229,8 @@ export default function AddProductForm({ onSuccess, category }) {
       <div className="flex flex-col">
         <Span>เนื้อหาหลัก</Span>
         <textarea
+          rows={5}
+          className="border rounded-lg w-full outline-none px-4 py-2 placeholder:text-[#707070] "
           placeholder="เนื้อหาหลัก"
           value={input.details}
           onChange={handleChangeInput}
@@ -228,7 +243,18 @@ export default function AddProductForm({ onSuccess, category }) {
 
       <div>
         <Span>รูปภาพ</Span>
-        <Input />
+        <input
+          type="file"
+          
+          onChange={(e) => {
+            if (e.target.files[0]) {
+              setFile(e.target.files[0]);
+            }
+          }}
+        />
+        {errorMessageFile ? (
+          <small className="text-red-500 px-2">{errorMessageFile}</small>
+        ) : null}
       </div>
 
       <div className="flex h-9 justify-center">

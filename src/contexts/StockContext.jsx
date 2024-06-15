@@ -11,14 +11,23 @@ export const StockContextProvider = ({ children }) => {
   const [newProduct, setNewProduct] = useState();
   const [res, setRes] = useState();
 
-  const addProductCoffee = async (input) => {
+  const addProductCoffee = async (input,file) => {
     const res = await stockApi.addProduct(input);
+    const formData = new FormData();
+    formData.append("productImage",file)
+    formData.append("productId",res.data.id)
+    const resAddProductImage = stockApi.addProductImage(formData)
     setAddCoffee(res.data);
+    setRes(resAddProductImage)
   };
 
-  const handleEditCoffeeProduct = async (body) => {
+  const handleEditCoffeeProduct = async (body,file) => {
     try {
       const resEditCoffeeProduct = await stockApi.editCoffeeProduct(body);
+      const formData = new FormData()
+      formData.append("productImage",file)
+      formData.append("productId",body.id)
+      await stockApi.addProductImage(formData)
       setRes(resEditCoffeeProduct.data);
     } catch (error) {
       console.log(error);

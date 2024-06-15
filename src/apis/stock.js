@@ -1,6 +1,10 @@
 import axios from "../config/axios";
 const stockApi = {};
 
+// add product image
+stockApi.addProductImage = (formData) =>
+  axios.post("http://localhost:8888/admin/add-product-image", formData);
+
 stockApi.addProduct = (body) =>
   axios.post("http://localhost:8888/admin/add-product-coffee", body);
 

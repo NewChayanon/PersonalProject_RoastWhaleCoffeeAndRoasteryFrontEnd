@@ -18,11 +18,7 @@ export const addCoffeeProduct = Joi.object({
     price: Joi.number().required(),
     stock: Joi.number().required(),
   }),
-  image: Joi.array().items(
-    Joi.object({
-      image: Joi.string(),
-    })
-  ),
+
 });
 
 export const validateCoffee = (coffeeArray) => {
@@ -95,9 +91,5 @@ export const editProduct = Joi.object({
     price: Joi.number().required(),
     stock: Joi.number().required(),
   }),
-  image: Joi.array().items(
-    Joi.object({
-      image: Joi.string(),
-    })
-  ),
+
 });

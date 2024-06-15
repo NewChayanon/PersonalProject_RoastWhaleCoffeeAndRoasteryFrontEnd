@@ -15,10 +15,13 @@ const LoginAndRegisterList = [
 
 export default function MenuRight() {
   const [open, setOpen] = useState(false);
-  
-  const { isUser, handleLogout } = useUser();
+
+  const { isUser, handleLogout, cartUser } = useUser();
 
   const navigate = useNavigate();
+
+  const sumItemInCart = cartUser?.length > 9 ? "9+" : cartUser?.length;
+  console.log(sumItemInCart);
 
   const dropdownUser = [
     { id: uuidv4(), title: isUser?.["email"], width: "SemiBold" },
@@ -40,7 +43,16 @@ export default function MenuRight() {
   return (
     <div className="flex">
       <Link to="/carts" className="flex mx-5">
-        {!isUser?.["is_admin"] && <IconCart width={30} />}
+        {!isUser?.["is_admin"] && (
+          <div className="relative flex justify-center items-center">
+            <IconCart width={30} />
+            {cartUser ? (
+              <div className="bg-red-500 font-light text-sm absolute top-[-0.1rem] right-[-0.7rem] text-white p-1 h-6 w-6 rounded-full flex justify-center items-center">
+                {sumItemInCart}
+              </div>
+            ) : null}
+          </div>
+        )}
       </Link>
       {isUser ? (
         <div
@@ -49,6 +61,7 @@ export default function MenuRight() {
           onClick={() => setOpen((prev) => !prev)}
         >
           <IconUser width={40} />
+
           {open && (
             <div
               className={`absolute ${BACKGROUND_COLOR["Support02/500"]} right-0 translate-y-1.5 w-[11rem] p-3 rounded-lg`}

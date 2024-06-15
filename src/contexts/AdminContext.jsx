@@ -37,7 +37,6 @@ export default function AdminContextProvider({ children }) {
     obj.status = el.status;
     return obj;
   });
-  console.log(prepareOrder);
 
   const handlePending = async (id) => {
     console.log(id);
@@ -57,6 +56,8 @@ export default function AdminContextProvider({ children }) {
     const res = await adminApi.updateStatusOrder(id, body);
     setRes(res.data)
   };
+
+  
 
   useEffect(() => {
     const fetchAllOrder = async () => {

@@ -4,12 +4,14 @@ import { Outlet } from "react-router-dom";
 
 export default function MainContainer() {
   return (
-    <div>
-      <Header />
-      <div className="pt-20">
+    <div className="min-h-[100vh] flex flex-col justify-between">
+      <div>
+        <Header />
         <Outlet />
       </div>
-      <Footer/>
+      <div>
+        <Footer />
+      </div>
     </div>
   );
 }

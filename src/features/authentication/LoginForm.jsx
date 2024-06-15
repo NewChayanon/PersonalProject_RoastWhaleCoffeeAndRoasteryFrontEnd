@@ -40,7 +40,7 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-center">
+    <div className="w-full min-h-full flex justify-center items-center">
       <form
         className="w-[40rem]  flex flex-col border p-5 rounded-xl gap-7 items-center"
         onSubmit={handleSubmitInput}

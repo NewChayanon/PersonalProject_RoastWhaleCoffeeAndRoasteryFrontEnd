@@ -28,7 +28,7 @@ export default function RegisterForm() {
     try {
       e.preventDefault();
       const error = registerValidator(input);
-    
+
       if (error) {
         return setErrorMessage(error);
       }
@@ -41,11 +41,16 @@ export default function RegisterForm() {
   };
   return (
     <div
-      className="w-full min-h-screen flex justify-center items-center"
+      className="w-full min-h-full flex justify-center items-center"
       onSubmit={handleSubmitInput}
     >
       <form className="w-[40rem]  flex flex-col border p-5 rounded-xl gap-7 items-center">
-        <EmailAndPasswordForm title="สมัครสมาชิก" input={input} onChange={handleChangeInput} error={errorMessage} />
+        <EmailAndPasswordForm
+          title="สมัครสมาชิก"
+          input={input}
+          onChange={handleChangeInput}
+          error={errorMessage}
+        />
         <div className="w-full px-1">
           <Span width="Light" color="Neutra/500">
             * รหัสผ่านจะต้องมีตัวอักษรอย่างน้อย 8 ตัวอักษร

@@ -9,11 +9,26 @@ export const StockContextProvider = ({ children }) => {
   const [toolProduct, setToolProduct] = useState(null);
   const [addCoffee, setAddCoffee] = useState();
   const [newProduct, setNewProduct] = useState();
+  const [res, setRes] = useState();
 
   const addProductCoffee = async (input) => {
     const res = await stockApi.addProduct(input);
     setAddCoffee(res.data);
   };
+
+  const handleEditCoffeeProduct = async (body) => {
+    try {
+      const resEditCoffeeProduct = await stockApi.editCoffeeProduct(body);
+      setRes(resEditCoffeeProduct.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleDeleteCoffee = async (id) => {
+    console.log(id)
+    const resDeleteCoffee = await stockApi.deleteCoffeeProduct(id)
+    setRes(resDeleteCoffee.data);
+  }
 
   useEffect(() => {
     const fetchCoffeeProduct = async () => {
@@ -29,7 +44,7 @@ export const StockContextProvider = ({ children }) => {
       }
     };
     fetchCoffeeProduct();
-  }, [addCoffee]);
+  }, [addCoffee,res]);
 
   useEffect(() => {
     const fetchCoffeeProduct = async () => {
@@ -49,7 +64,14 @@ export const StockContextProvider = ({ children }) => {
 
   return (
     <StockContext.Provider
-      value={{ coffeeProduct, addProductCoffee, newProduct, toolProduct }}
+      value={{
+        coffeeProduct,
+        addProductCoffee,
+        newProduct,
+        toolProduct,
+        handleEditCoffeeProduct,
+        handleDeleteCoffee
+      }}
     >
       {children}
     </StockContext.Provider>

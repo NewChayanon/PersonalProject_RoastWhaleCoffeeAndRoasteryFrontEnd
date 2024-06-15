@@ -1,42 +1,48 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
-import Button from "../../../components/Button";
-import Input from "../../../components/Input";
-import Span from "../../../components/Span";
-import {
-  addCoffeeProductValidator,
-  handleValidateCoffee,
-} from "../../../validators/validators";
-import { useStock } from "../../../hooks/useStock";
 
-export default function AddProductForm({ onSuccess, category }) {
+import { useState } from "react";
+import { useStock } from "../../hooks/useStock";
+import {
+  editProductValidator,
+  handleValidateCoffee,
+} from "../../validators/validators";
+import Span from "../../components/Span";
+import Input from "../../components/Input";
+import Button from "../../components/Button";
+
+export default function EditProductCoffee({ onSuccess, item, category }) {
   const initialInput = {
-    name: "",
-    description: "",
-    details: "",
+    id: item.id,
+    name: item.name,
+    description: item.description,
+    details: item.details,
     popular: 0,
     category: category,
     coffee: [
       {
+        id: category == "coffee" ? item["product_and_size"][0].id : 0,
         size: "ONE_HUNDRED",
-        price: category == "coffee" ? "" : 0,
-        stock: category == "coffee" ? "" : 0,
+        price: category == "coffee" ? +item["product_and_size"][0].price : 0,
+        stock: category == "coffee" ? item["product_and_size"][0].stock : 0,
       },
       {
+        id: category == "coffee" ? item["product_and_size"][1].id : 0,
         size: "TWO_HUNDRED_FIFTY",
-        price: category == "coffee" ? "" : 0,
-        stock: category == "coffee" ? "" : 0,
+        price: category == "coffee" ? +item["product_and_size"][1].price : 0,
+        stock: category == "coffee" ? item["product_and_size"][1].stock : 0,
       },
       {
+        id: category == "coffee" ? item["product_and_size"][2].id : 0,
         size: "FIVE_HUNDRED",
-        price: category == "coffee" ? "" : 0,
-        stock: category == "coffee" ? "" : 0,
+        price: category == "coffee" ? +item["product_and_size"][2].price : 0,
+        stock: category == "coffee" ? item["product_and_size"][2].stock : 0,
       },
     ],
     tool: {
+      id: category == "tool" ? item["product_and_size"][0].id : 0,
       size: "TOOL",
-      price: category == "tool" ? "" : 0,
-      stock: category == "tool" ? "" : 0,
+      price: category == "tool" ? +item["product_and_size"][0].price : 0,
+      stock: category == "tool" ? item["product_and_size"][0].stock : 0,
     },
     image: [{ image: "z," }, { image: "s," }],
   };
@@ -47,21 +53,26 @@ export default function AddProductForm({ onSuccess, category }) {
     details: "",
     popular: 0,
     category: category,
+    coffee: [
+      { size: "ONE_HUNDRED", price: "", stock: "" },
+      { size: "TWO_HUNDRED_FIFTY", price: "", stock: "" },
+      { size: "FIVE_HUNDRED", price: "", stock: "" },
+    ],
+    tool: { size: "TOOL", price: "", stock: "" },
+    image: [{ image: "z," }, { image: "s," }],
     "coffee[0].price": "",
     "coffee[0].stock": "",
     "coffee[1].price": "",
     "coffee[1].stock": "",
     "coffee[2].price": "",
     "coffee[2].stock": "",
-    "tool.size":"",
-    "tool.price":"",
-    "tool.stock":"",
-    image: [{ image: "z," }, { image: "s," }],
+    "tool.size": "",
+    "tool.price": "",
+    "tool.stock": "",
   };
-
   const [input, setInput] = useState(initialInput);
   const [errorMessage, setErrorMessage] = useState(initialErrorMessage);
-  const { addProductCoffee } = useStock();
+  const { handleEditCoffeeProduct, handleDeleteCoffee } = useStock();
 
   const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -81,12 +92,11 @@ export default function AddProductForm({ onSuccess, category }) {
       tool: { ...input.tool, [e.target.name]: e.target.value },
     });
   };
-
   const handleSubmitForm = async (e) => {
     try {
-      console.log(input);
       e.preventDefault();
-      const error = addCoffeeProductValidator(input);
+      console.log(input);
+      const error = editProductValidator(input);
       const { errorValidatorCoffee } = handleValidateCoffee(input);
       console.log(error);
       if (error) {
@@ -94,7 +104,7 @@ export default function AddProductForm({ onSuccess, category }) {
         return setErrorMessage(error);
       }
       setErrorMessage(initialErrorMessage);
-      await addProductCoffee(input);
+      await handleEditCoffeeProduct(input);
       onSuccess();
     } catch (error) {
       console.log(error);
@@ -231,7 +241,12 @@ export default function AddProductForm({ onSuccess, category }) {
         <Input />
       </div>
 
-      <div className="flex h-9 justify-center">
+      <div className="flex h-9 justify-between">
+        <div className="w-72" onClick={() => handleDeleteCoffee(item.id)}>
+          <Button id={item.id} type="button">
+            ลบ
+          </Button>
+        </div>
         <div className="w-72">
           <Button>บันทึก</Button>
         </div>

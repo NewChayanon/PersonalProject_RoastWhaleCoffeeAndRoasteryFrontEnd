@@ -10,7 +10,7 @@ export default function Bill() {
     return acc;
   }, initialValue);
   return (
-    <div className="border p-4 rounded-lg flex flex-col gap-2">
+    <div className="border p-4 rounded-lg flex flex-col gap-2 sticky top-24">
       <div>
         <Span>ยอดรวมตะกร้าสินค้า</Span>
       </div>

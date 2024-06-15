@@ -28,6 +28,7 @@ export const UserContextProvider = ({ children }) => {
   const handleLogout = () => {
     removeAccessToken();
     setIsUser(null);
+    setCartUser(null)
   };
 
   const handleClickAddCoffeeToCart = async (productId) => {

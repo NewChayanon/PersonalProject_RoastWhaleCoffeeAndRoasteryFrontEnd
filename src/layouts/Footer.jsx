@@ -19,7 +19,7 @@ const IconFooter = [
 
 export default function Footer() {
   return (
-    <header className="bg-[#190F01] h-20 flex  w-full ">
+    <div className="bg-[#190F01] h-20 flex  w-full ">
       <div className="flex items-center justify-around flex-grow ">
         <Logo />
         <Span size={16} width="Regular" color="Primary/50">
@@ -33,6 +33,6 @@ export default function Footer() {
           ))}
         </div>
       </div>
-    </header>
+    </div>
   );
 }

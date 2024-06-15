@@ -13,7 +13,11 @@ export const addCoffeeProduct = Joi.object({
       stock: Joi.number().required(),
     })
   ),
-  tool: Joi.object().required(),
+  tool: Joi.object({
+    size: Joi.string(),
+    price: Joi.number().required(),
+    stock: Joi.number().required(),
+  }),
   image: Joi.array().items(
     Joi.object({
       image: Joi.string(),
@@ -68,4 +72,32 @@ export const payment = Joi.object({
   date: Joi.string().required(),
   hour: Joi.string().required(),
   minute: Joi.string().required(),
+});
+
+export const editProduct = Joi.object({
+  id: Joi.number(),
+  name: Joi.string().required(),
+  description: Joi.string().required(),
+  details: Joi.string().required(),
+  popular: Joi.number().required(),
+  category: Joi.string(),
+  coffee: Joi.array().items(
+    Joi.object({
+      id: Joi.number(),
+      size: Joi.string().required(),
+      price: Joi.number().required(),
+      stock: Joi.number().required(),
+    })
+  ),
+  tool: Joi.object({
+    id:Joi.number(),
+    size: Joi.string(),
+    price: Joi.number().required(),
+    stock: Joi.number().required(),
+  }),
+  image: Joi.array().items(
+    Joi.object({
+      image: Joi.string(),
+    })
+  ),
 });

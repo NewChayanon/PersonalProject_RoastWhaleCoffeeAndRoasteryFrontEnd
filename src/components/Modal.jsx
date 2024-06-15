@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect } from "react";
 import { createPortal } from 'react-dom';
 
@@ -27,9 +28,9 @@ export default function Modal({ width = 30, title, children, open, onClose }) {
                     onMouseDown={e => e.stopPropagation()}
                   >
                     <div className="flex justify-between items-center p-4 border-b">
-                      <button className="invisible">&#10005;</button>
+                      <button className="invisible" onClick={onClose}>&#10005;</button>
                       <h5 className="text-2xl font-medium">{title}</h5>
-                      <button onClick={onClose}>&#10005;</button>
+                      <button onMouseDown={onClose}>&#10005;</button>
                     </div>
                     <div className="p-4">{children}</div>
                   </div>

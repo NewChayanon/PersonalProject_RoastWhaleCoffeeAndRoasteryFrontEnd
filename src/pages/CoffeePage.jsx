@@ -11,6 +11,7 @@ export default function CoffeePage() {
   const { isUser } = useUser();
   const [open, setOpen] = useState(false);
   const { coffeeProduct } = useStock();
+  
   return (
     <div className="flex flex-col items-center">
       <div>
@@ -34,6 +35,8 @@ export default function CoffeePage() {
             id={el.id}
             name={el.name}
             description={el.description}
+            item={el}
+            category="coffee"
           />
         ))}
 
@@ -46,7 +49,7 @@ export default function CoffeePage() {
               title="เพิ่ม / อัพเดท สินค้า"
               width={44}
             >
-              <AddProductForm onSuccess={() => setOpen(false)} />
+              <AddProductForm category="coffee" onSuccess={() => setOpen(false)} />
             </Modal>
           </>
         ) : null}

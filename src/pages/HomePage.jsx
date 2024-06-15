@@ -8,7 +8,7 @@ export default function HomePage() {
       <StockContextProvider>
         <ImageSlidesShow />
         <ProductRecommend title="สินค้าใหม่" />
-        <ProductRecommend title="สินค้าขายดี" />
+        <ProductRecommend title="สินค้าขายดี (coming soon)" />
       </StockContextProvider>
     </div>
   );

@@ -20,6 +20,8 @@ export default function ProductRecommend({ title }) {
               id={el.id}
               name={el.name}
               description={el.description}
+              item={el}
+              category={el.category.name}
             />
           ))}
         </div>

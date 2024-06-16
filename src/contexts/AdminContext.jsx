@@ -9,7 +9,7 @@ export default function AdminContextProvider({ children }) {
   const [order, setOrder] = useState(null);
   const [res, setRes] = useState(null);
   const { isUser } = useUser();
-
+  console.log(order)
   const prepareOrder = order?.map((el) => {
     const obj = {};
     const initialValue = { price: 0 };

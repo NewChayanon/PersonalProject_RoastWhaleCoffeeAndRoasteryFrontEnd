@@ -32,7 +32,7 @@ export const UserContextProvider = ({ children }) => {
   };
 
   const handleClickAddCoffeeToCart = async (productId) => {
-    console.log(productId);
+    
     const body = { quantity: 1 };
     const res = await userApi.quickAdd(productId, body);
     setRes(res.data);

@@ -1,9 +1,14 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
+import { useState } from "react";
 import adminApi from "../../apis/admin";
 import Button from "../../components/Button";
+import Modal from "../../components/Modal";
 import Span from "../../components/Span";
 import { useAdmin } from "../../hooks/useAdmin";
+import { IconPayment } from "../../icons/icon";
+import AddProductForm from "../stock/components/AddProductForm";
+import PaymentZoom from "../../layouts/PaymentZoom";
 
 export default function OrderListAll({
     id,
@@ -16,6 +21,7 @@ export default function OrderListAll({
   image,
   status,
 }) {
+  const [open, setOpen] = useState(false);
    
     const {handlePending,handSuccess,handFailed} = useAdmin()
   return (
@@ -35,7 +41,18 @@ export default function OrderListAll({
         <Span>{`฿ ${price.toFixed(2)}`}</Span>
       </div>
       <div>
-        <Span>{image}</Span>
+        <IconPayment onClick={() => setOpen(true)} width={40} />
+
+        {/* <Span>{image}</Span> */}
+            <Modal
+              open={open}
+              onClose={() => setOpen(false)}
+              title="หลักฐานการชำระ"
+              width={44}
+            >
+              <PaymentZoom image={image}/>
+              {/* <AddProductForm category="coffee" onSuccess={() => setOpen(false)} /> */}
+            </Modal>
       </div>
       <div>
         <Span>{status}</Span>

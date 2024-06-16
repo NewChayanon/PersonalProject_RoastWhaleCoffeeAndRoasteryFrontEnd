@@ -4,7 +4,7 @@ import StatusOrderList from "./StatusOrderList";
 
 export default function StatusOrderTable() {
   const { shoppingList } = useUser();
-
+  console.log(shoppingList);
   // el.status
   // el.cart.cart_items[0].product_and_size.product_id
   // = [{name : "", description:"",status:""}]
@@ -20,14 +20,13 @@ export default function StatusOrderTable() {
 
   const newShoppingList = shoppingList?.map((el) => {
     const obj = {};
-    obj.id = el.id
+    obj.id = el.id;
     obj.name = el.cart.cart_items[0].product_and_size.product.name;
-    obj.description =
-      el.cart.cart_items[0].product_and_size.product.description;
+    obj.description = el.cart.cart_items[0].product_and_size.product.description;
     obj.status = el.status;
     return obj;
   });
-  console.log(shoppingList);
+  
 
   return (
     <div>
@@ -36,7 +35,12 @@ export default function StatusOrderTable() {
         <Span>สถานะออเดอร์</Span>
       </div>
       {newShoppingList?.map((el) => (
-        <StatusOrderList key={el.id}  name={el.name} description={el.description} status={el.status} />
+        <StatusOrderList
+          key={el.id}
+          name={el.name}
+          description={el.description}
+          status={el.status}
+        />
       ))}
     </div>
   );

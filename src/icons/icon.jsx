@@ -6,6 +6,7 @@ import instagram from "./assets/instagram-rounded-svgrepo-com.svg";
 import twitter from "./assets/twitter-rounded-svgrepo-com.svg";
 import youtube from "./assets/youtube-rounded-svgrepo-com.svg";
 import user from "./assets/user-circle-svgrepo-com.svg";
+import payment from "./assets/image-square-svgrepo-com.svg";
 
 export function LogoRoastWhale({ width }) {
   return <img style={{ width: `${width}px` }} src={logo} alt="logo" />;
@@ -37,5 +38,14 @@ export function IconYoutube({ width }) {
 }
 
 export const IconUser = ({ width }) => (
-  <img style={{ width: `${width}px` }} src={user} alt="icon-user" className="rounded-full" />
+  <img
+    style={{ width: `${width}px` }}
+    src={user}
+    alt="icon-user"
+    className="rounded-full"
+  />
+);
+
+export const IconPayment = ({ width ,onClick }) => (
+  <img role="button" onClick={onClick} style={{ width: `${width}px` }} src={payment} alt="icon-payment" />
 );

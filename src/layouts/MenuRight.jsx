@@ -21,7 +21,7 @@ export default function MenuRight() {
   const navigate = useNavigate();
 
   const sumItemInCart = cartUser?.length > 9 ? "9+" : cartUser?.length;
-  console.log(sumItemInCart);
+  
 
   const dropdownUser = [
     { id: uuidv4(), title: isUser?.["email"], width: "SemiBold" },

@@ -6,6 +6,7 @@ import {
   removeAccessToken,
   setAccessToken,
 } from "../utils/local-storage";
+import { useNavigate } from "react-router-dom";
 
 export const UserContext = createContext();
 
@@ -14,6 +15,7 @@ export const UserContextProvider = ({ children }) => {
   const [cartUser, setCartUser] = useState(null);
   const [shoppingList, setShoppingList] = useState(null);
   const [res, setRes] = useState();
+  
 
   const handleLogin = async (credentials) => {
     const res = await userApi.Login(credentials);
@@ -32,7 +34,6 @@ export const UserContextProvider = ({ children }) => {
   };
 
   const handleClickAddCoffeeToCart = async (productId) => {
-    
     const body = { quantity: 1 };
     const res = await userApi.quickAdd(productId, body);
     setRes(res.data);
@@ -78,6 +79,12 @@ export const UserContextProvider = ({ children }) => {
     setRes(resPayment);
   };
 
+  const handleAddProductBySize = async (productAndSizeId, body) => {
+    console.log(productAndSizeId, body);
+    const res = await userApi.addProduct(productAndSizeId, body)
+    setRes(res.data)
+  };
+
   useEffect(() => {
     const fetchCartUser = async () => {
       const resCartUser = await userApi.cartUser();
@@ -119,6 +126,7 @@ export const UserContextProvider = ({ children }) => {
         handleAllDeleteInCart,
         checkOutCart,
         shoppingList,
+        handleAddProductBySize,
       }}
     >
       {children}

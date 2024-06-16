@@ -22,4 +22,6 @@ stockApi.editCoffeeProduct = (body) =>
 stockApi.deleteCoffeeProduct = (id) =>
   axios.patch(`http://localhost:8888/admin/remove-product/${id}`);
 
+stockApi.getProductInfo = (productId)=> axios.get(`http://localhost:8888/product/${productId}`)
+
 export default stockApi;

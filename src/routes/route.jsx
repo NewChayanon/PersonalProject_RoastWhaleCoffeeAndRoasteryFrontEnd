@@ -12,6 +12,10 @@ import { StockContextProvider } from "../contexts/StockContext";
 import CheckOutPage from "../pages/ChackOutPage";
 import StatusOrderUserPage from "../pages/StatusOrderUserPage";
 import OrderPage from "../pages/OrderPage";
+import ProductInfo from "../pages/ProductInfo";
+import ProtectedRoute from "../features/authentication/ProtectedRoute";
+import ProtectedRouteAdmin from "../features/authentication/ProtectedRouteAdmin";
+import ProtectedRouteUser from "../features/authentication/ProtectedRouteUser";
 
 const router = createBrowserRouter([
   {
@@ -35,10 +39,39 @@ const router = createBrowserRouter([
           </StockContextProvider>
         ),
       },
-      { path: "/carts", element: <CartPage /> },
-      { path: "/check-out", element: <CheckOutPage /> },
-      { path: "/shopping-list", element: <StatusOrderUserPage /> },
-      { path: "/order", element: <OrderPage /> },
+      {
+        path: "/carts",
+        element: (
+          <ProtectedRouteUser>
+            <CartPage />
+          </ProtectedRouteUser>
+        ),
+      },
+      {
+        path: "/check-out",
+        element: (
+          <ProtectedRouteUser>
+            <CheckOutPage />
+          </ProtectedRouteUser>
+        ),
+      },
+      {
+        path: "/shopping-list",
+        element: (
+          <ProtectedRouteUser>
+            <StatusOrderUserPage />
+          </ProtectedRouteUser>
+        ),
+      },
+      {
+        path: "/order",
+        element: (
+          <ProtectedRouteAdmin>
+            <OrderPage />
+          </ProtectedRouteAdmin>
+        ),
+      },
+      { path: "/product/:productId", element: <ProductInfo /> },
     ],
   },
   { path: "/logins", element: <LoginPage /> },

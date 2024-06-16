@@ -16,11 +16,11 @@ export default function Button({
   round = "",
   children,
   type="submit",
-  
+  onClick=""
   
 }) {
   return (
-    <button  type={type}
+    <button  type={type} onClick={onClick}
       className={`${BACKGROUND_COLOR[bg]} ${TEXT_COLOR[color]} ${FONT_WEIGHT[weight]} ${TEXT_SIZE[size]} w-full rounded-lg h-full  `}
     >
       {children}

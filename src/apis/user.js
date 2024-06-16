@@ -29,4 +29,10 @@ userApi.getShoppingList = () =>
 userApi.updatePaymentImage = (formData) =>
   axios.patch(`http://localhost:8888/users/payment`, formData);
 
+userApi.addProduct = (productAndSizeId, body) =>
+  axios.post(
+    `http://localhost:8888/users/add-product/${productAndSizeId}`,
+    body
+  );
+
 export default userApi;

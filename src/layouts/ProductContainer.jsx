@@ -7,12 +7,29 @@ import { useState } from "react";
 import Modal from "../components/Modal";
 import EditProductCoffee from "../features/admin/EditProductCoffee";
 import { BACKGROUND_COLOR } from "../constants/InfoFigma";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function ProductContainer({ id, name, description, item ,category, src }) {
+
+export default function ProductContainer({
+  id,
+  name,
+  description,
+  item,
+  category,
+  src,
+}) {
   const [open, setOpen] = useState(false);
-  const { isUser } = useUser();
-  const { handleClickAddCoffeeToCart } = useUser();
-  
+  const { handleClickAddCoffeeToCart, isUser } = useUser();
+
+  const navigate = useNavigate();
+
+  const handleCheckUser = () => {
+    if (!isUser) {
+      navigate("/logins");
+    }
+    handleClickAddCoffeeToCart(id);
+  };
+
   // lowest price
   const lowestPrice = item?.["product_and_size"].reduce(
     (acc, crr) => {
@@ -27,15 +44,18 @@ export default function ProductContainer({ id, name, description, item ,category
   return (
     <div className="w-[260px] max-h-[425px] p-3 flex flex-col justify-between">
       <div>
-        <div className="relative">
-          <img src={ src ? `http://localhost:8888/${src.image}` : testImage} alt="test-image" />
-          
+        <Link className="relative" to={`/product/${id}`}>
+          <img
+            src={src ? `http://localhost:8888/${src.image}` : testImage}
+            alt="test-image"
+          />
+
           <div
             className={`absolute top-2 right-4 ${BACKGROUND_COLOR["Support02/500"]} py-1 px-2 rounded-md`}
           >
             <Span>{`฿ ${lowestPrice.lowestPrice}`}</Span>
           </div>
-        </div>
+        </Link>
       </div>
       <div>
         <div className="truncate">
@@ -67,9 +87,11 @@ export default function ProductContainer({ id, name, description, item ,category
                 </Modal>
               </div>
             ) : (
-              <div onClick={() => handleClickAddCoffeeToCart(id)}>
-                <Span>Add to cart</Span>
-              </div>
+              
+                <div onClick={handleCheckUser}>
+                  <Span>Add to cart</Span>
+                </div>
+              
             )}
           </Button>
         </div>

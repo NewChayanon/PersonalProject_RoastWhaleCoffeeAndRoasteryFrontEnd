@@ -51,7 +51,6 @@ export default function OrderListAll({
               width={44}
             >
               <PaymentZoom image={image}/>
-              {/* <AddProductForm category="coffee" onSuccess={() => setOpen(false)} /> */}
             </Modal>
       </div>
       <div>

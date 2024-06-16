@@ -31,14 +31,14 @@ const initialErrorMessage = {
   postcode: "",
 };
 const initialPayment = {
-  image: "",
+  image:"wait",
   date: "",
   hour: "",
   minute: "",
 };
 
 const initialPaymentError = {
-  image: "",
+  image:"wait",
   date: "",
   hour: "",
   minute: "",
@@ -50,6 +50,8 @@ export default function CheckOutForm() {
   const [payment, setPayment] = useState(initialPayment);
   const [errorMessagePayment, setErrorMessagePayment] =
     useState(initialPaymentError);
+  const [file, setFile] = useState(null);
+  const [errorMessageFile, setErrorMessageFile] = useState("");
   const { isUser, checkOutCart } = useUser();
 
   const navigator = useNavigate();
@@ -67,26 +69,29 @@ export default function CheckOutForm() {
       const errorAddress = addressValidate(input);
       const errorPayment = paymentValidate(payment);
 
-      if (errorAddress || errorPayment) {
+      if (errorAddress || errorPayment || !file) {
         if (errorAddress) {
           setErrorMessage(errorAddress);
-        }
-        if (!errorAddress) {
+        } else {
           setErrorMessage(initialErrorMessage);
         }
         if (errorPayment) {
           setErrorMessagePayment(errorPayment);
-        }
-        if (!errorPayment) {
+        } else {
           setErrorMessagePayment(initialPaymentError);
+        }
+        if (!file) {
+          setErrorMessageFile("file is not allowed to be empty");
+        } else {
+          setErrorMessageFile("");
         }
         return;
       }
-
+      setErrorMessageFile("");
       setErrorMessage(initialErrorMessage);
       setErrorMessagePayment(initialPaymentError);
+      await checkOutCart(input, payment, file);
       navigator("/");
-      await checkOutCart(input, payment);
     } catch (error) {
       console.log(error);
     }
@@ -209,16 +214,21 @@ export default function CheckOutForm() {
                 </div>
               </div>
               <div className="flex gap-3">
-                <div>
+                <div className="flex flex-col">
                   <Span>แนบสลิป *</Span>
-                  <Input
-                    type="text"
-                    placeholder="แนบสลิป"
-                    value={payment.image}
-                    onChange={handlePaymentInput}
-                    name="image"
-                    error={errorMessagePayment.image}
+                  <input
+                    type="file"
+                    onChange={(e) => {
+                      if (e.target.files[0]) {
+                        setFile(e.target.files[0]);
+                      }
+                    }}
                   />
+                  {errorMessageFile ? (
+                    <small className="text-red-500 px-2">
+                      {errorMessageFile}
+                    </small>
+                  ) : null}
                 </div>
                 <div>
                   <Span>วันที่ชำระ *</Span>

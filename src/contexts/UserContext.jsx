@@ -28,7 +28,7 @@ export const UserContextProvider = ({ children }) => {
   const handleLogout = () => {
     removeAccessToken();
     setIsUser(null);
-    setCartUser(null)
+    setCartUser(null);
   };
 
   const handleClickAddCoffeeToCart = async (productId) => {
@@ -67,10 +67,13 @@ export const UserContextProvider = ({ children }) => {
     });
   };
 
-  const checkOutCart = async (input, payment) => {
-    console.log(input, payment);
+  const checkOutCart = async (input, payment, file) => {
     const resAddress = await userApi.address(input);
     const resPayment = await userApi.payment(payment);
+    const formData = new FormData();
+    formData.append("paymentImage", file);
+    formData.append("orderId", resPayment.data.id);
+    await userApi.updatePaymentImage(formData);
     setRes(resAddress);
     setRes(resPayment);
   };
@@ -102,7 +105,7 @@ export const UserContextProvider = ({ children }) => {
     };
     fetchUser();
   }, []);
-  
+
   return (
     <UserContext.Provider
       value={{

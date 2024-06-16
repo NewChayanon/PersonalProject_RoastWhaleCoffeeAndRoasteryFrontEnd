@@ -19,10 +19,14 @@ userApi.deleteProductInCart = (cartItemId) =>
 
 userApi.address = (body) =>
   axios.post(`http://localhost:8888/users/address`, body);
+
 userApi.payment = (body) =>
   axios.post(`http://localhost:8888/users/check-out`, body);
 
 userApi.getShoppingList = () =>
   axios.get(`http://localhost:8888/users/shopping-list`);
+
+userApi.updatePaymentImage = (formData) =>
+  axios.patch(`http://localhost:8888/users/payment`, formData);
 
 export default userApi;

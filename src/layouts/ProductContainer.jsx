@@ -8,15 +8,15 @@ import Modal from "../components/Modal";
 import EditProductCoffee from "../features/admin/EditProductCoffee";
 import { BACKGROUND_COLOR } from "../constants/InfoFigma";
 
-export default function ProductContainer({ id, name, description, item ,category,src }) {
+export default function ProductContainer({ id, name, description, item ,category, src }) {
   const [open, setOpen] = useState(false);
   const { isUser } = useUser();
   const { handleClickAddCoffeeToCart } = useUser();
-  console.log(src)
+  
   // lowest price
   const lowestPrice = item?.["product_and_size"].reduce(
     (acc, crr) => {
-      if (crr.price < acc.lowestPrice) {
+      if (crr.price < acc.lowestPrice && crr.price > 0) {
         acc.lowestPrice = crr.price;
       }
       return acc;
@@ -25,7 +25,7 @@ export default function ProductContainer({ id, name, description, item ,category
   );
 
   return (
-    <div className="w-[260px] max-h-[425px] p-3">
+    <div className="w-[260px] max-h-[425px] p-3 flex flex-col justify-between">
       <div>
         <div className="relative">
           <img src={ src ? `http://localhost:8888/${src.image}` : testImage} alt="test-image" />

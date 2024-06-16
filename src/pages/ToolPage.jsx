@@ -28,6 +28,7 @@ export default function ToolPage() {
             description={el.description}
             item={el}
             category="tool"
+            src={el.image[0]}
           />
         ))}
 

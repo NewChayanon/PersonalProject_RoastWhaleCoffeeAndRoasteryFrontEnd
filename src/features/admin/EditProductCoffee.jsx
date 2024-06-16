@@ -44,7 +44,6 @@ export default function EditProductCoffee({ onSuccess, item, category }) {
       price: category == "tool" ? +item["product_and_size"][0].price : 0,
       stock: category == "tool" ? item["product_and_size"][0].stock : 0,
     },
-    
   };
 
   const initialErrorMessage = {
@@ -59,7 +58,7 @@ export default function EditProductCoffee({ onSuccess, item, category }) {
       { size: "FIVE_HUNDRED", price: "", stock: "" },
     ],
     tool: { size: "TOOL", price: "", stock: "" },
-    
+
     "coffee[0].price": "",
     "coffee[0].stock": "",
     "coffee[1].price": "",
@@ -96,16 +95,14 @@ export default function EditProductCoffee({ onSuccess, item, category }) {
   const handleSubmitForm = async (e) => {
     try {
       e.preventDefault();
-      console.log(input);
       const error = editProductValidator(input);
       const { errorValidatorCoffee } = handleValidateCoffee(input);
-      console.log(error);
       if (error) {
         error.coffee = errorValidatorCoffee;
         return setErrorMessage(error);
       }
       setErrorMessage(initialErrorMessage);
-      await handleEditCoffeeProduct(input,file);
+      await handleEditCoffeeProduct(input, file);
       onSuccess();
     } catch (error) {
       console.log(error);
@@ -240,13 +237,13 @@ export default function EditProductCoffee({ onSuccess, item, category }) {
       <div>
         <Span>รูปภาพ</Span>
         <input
-        type="file"
-        onChange={e => {
-          if (e.target.files[0]) {
-            setFile(e.target.files[0]);
-          }
-        }}
-      />
+          type="file"
+          onChange={(e) => {
+            if (e.target.files[0]) {
+              setFile(e.target.files[0]);
+            }
+          }}
+        />
       </div>
 
       <div className="flex h-9 justify-between">

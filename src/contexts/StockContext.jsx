@@ -11,33 +11,35 @@ export const StockContextProvider = ({ children }) => {
   const [newProduct, setNewProduct] = useState();
   const [res, setRes] = useState();
 
-  const addProductCoffee = async (input,file) => {
+  const addProductCoffee = async (input, file) => {
     const res = await stockApi.addProduct(input);
     const formData = new FormData();
-    formData.append("productImage",file)
-    formData.append("productId",res.data.id)
-    const resAddProductImage = stockApi.addProductImage(formData)
+    formData.append("productImage", file);
+    formData.append("productId", res.data.id);
+    const resAddProductImage = stockApi.addProductImage(formData);
     setAddCoffee(res.data);
-    setRes(resAddProductImage)
+    setRes(resAddProductImage);
   };
 
-  const handleEditCoffeeProduct = async (body,file) => {
+  const handleEditCoffeeProduct = async (body, file) => {
     try {
       const resEditCoffeeProduct = await stockApi.editCoffeeProduct(body);
-      const formData = new FormData()
-      formData.append("productImage",file)
-      formData.append("productId",body.id)
-      await stockApi.addProductImage(formData)
+      if (file) {
+        const formData = new FormData();
+        formData.append("productImage", file);
+        formData.append("productId", body.id);
+        await stockApi.addProductImage(formData);
+      }
       setRes(resEditCoffeeProduct.data);
     } catch (error) {
       console.log(error);
     }
   };
   const handleDeleteCoffee = async (id) => {
-    console.log(id)
-    const resDeleteCoffee = await stockApi.deleteCoffeeProduct(id)
+    console.log(id);
+    const resDeleteCoffee = await stockApi.deleteCoffeeProduct(id);
     setRes(resDeleteCoffee.data);
-  }
+  };
 
   useEffect(() => {
     const fetchCoffeeProduct = async () => {
@@ -53,7 +55,7 @@ export const StockContextProvider = ({ children }) => {
       }
     };
     fetchCoffeeProduct();
-  }, [addCoffee,res]);
+  }, [addCoffee, res]);
 
   useEffect(() => {
     const fetchCoffeeProduct = async () => {
@@ -79,7 +81,7 @@ export const StockContextProvider = ({ children }) => {
         newProduct,
         toolProduct,
         handleEditCoffeeProduct,
-        handleDeleteCoffee
+        handleDeleteCoffee,
       }}
     >
       {children}

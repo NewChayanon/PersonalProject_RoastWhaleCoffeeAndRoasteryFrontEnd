@@ -5,10 +5,9 @@ import ProductContainer from "./ProductContainer";
 
 export default function ProductRecommend({ title }) {
   const { newProduct } = useStock();
-  console.log(newProduct);
   return (
     <div>
-      {/* wait map */}
+      
       <div>
         <div className="flex justify-center">
           <Span>{title}</Span>
@@ -22,6 +21,7 @@ export default function ProductRecommend({ title }) {
               description={el.description}
               item={el}
               category={el.category.name}
+              src={el.image[0]}
             />
           ))}
         </div>

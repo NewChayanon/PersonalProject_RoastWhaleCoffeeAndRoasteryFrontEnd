@@ -111,7 +111,7 @@ export default function EditProductCoffee({ onSuccess, item, category }) {
 
   return (
     <form className="m-4" onSubmit={handleSubmitForm}>
-      <div>
+      <div className="mb-2">
         <Span>ชื่อสินค้า</Span>
         <Input
           type="text"
@@ -123,62 +123,78 @@ export default function EditProductCoffee({ onSuccess, item, category }) {
         />
       </div>
 
-      <div className="flex justify-between">
+      <div className="flex justify-between mb-2">
         {category == "coffee" ? (
           <>
-            <div>
+            <div className="">
               <Span>ราคาสินค้า 100/250/500 G</Span>
-              <Input
-                type="text"
-                placeholder="ราคาสินค้าขนาด 100 กรัม"
-                value={input.coffee[0].price}
-                onChange={(e) => handleChangeCoffee(e, 0)}
-                name="price"
-                error={errorMessage["coffee[0].price"]}
-              />
-              <Input
-                type="text"
-                placeholder="ราคาสินค้าขนาด 250 กรัม"
-                value={input.coffee[1].price}
-                onChange={(e) => handleChangeCoffee(e, 1)}
-                name="price"
-                error={errorMessage["coffee[1].price"]}
-              />
-              <Input
-                type="text"
-                placeholder="ราคาสินค้าขนาด 500 กรัม"
-                value={input.coffee[2].price}
-                onChange={(e) => handleChangeCoffee(e, 2)}
-                name="price"
-                error={errorMessage["coffee[2].price"]}
-              />
+              <div className="flex flex-col justify-between">
+                <div className="w-[20rem]">
+                  <Input
+                    type="text"
+                    placeholder="ราคาสินค้าขนาด 100 กรัม"
+                    value={input.coffee[0].price}
+                    onChange={(e) => handleChangeCoffee(e, 0)}
+                    name="price"
+                    error={errorMessage["coffee[0].price"]}
+                  />
+                </div>
+                <div className="w-[20rem]">
+                  <Input
+                    type="text"
+                    placeholder="ราคาสินค้าขนาด 250 กรัม"
+                    value={input.coffee[1].price}
+                    onChange={(e) => handleChangeCoffee(e, 1)}
+                    name="price"
+                    error={errorMessage["coffee[1].price"]}
+                  />
+                </div>
+                <div className="w-[20rem]">
+                  <Input
+                    type="text"
+                    placeholder="ราคาสินค้าขนาด 500 กรัม"
+                    value={input.coffee[2].price}
+                    onChange={(e) => handleChangeCoffee(e, 2)}
+                    name="price"
+                    error={errorMessage["coffee[2].price"]}
+                  />
+                </div>
+              </div>
             </div>
             <div>
               <Span>จำนวนสินค้า</Span>
-              <Input
-                type="text"
-                placeholder="จำนวนสินค้า"
-                value={input.coffee[0].stock}
-                onChange={(e) => handleChangeCoffee(e, 0)}
-                name="stock"
-                error={errorMessage["coffee[0].stock"]}
-              />
-              <Input
-                type="text"
-                placeholder="จำนวนสินค้า"
-                value={input.coffee[1].stock}
-                onChange={(e) => handleChangeCoffee(e, 1)}
-                name="stock"
-                error={errorMessage["coffee[1].stock"]}
-              />
-              <Input
-                type="text"
-                placeholder="จำนวนสินค้า"
-                value={input.coffee[2].stock}
-                onChange={(e) => handleChangeCoffee(e, 2)}
-                name="stock"
-                error={errorMessage["coffee[2].stock"]}
-              />
+              <div className="flex flex-col justify-between">
+                <div className="w-[20rem]">
+                  <Input
+                    type="text"
+                    placeholder="จำนวนสินค้า"
+                    value={input.coffee[0].stock}
+                    onChange={(e) => handleChangeCoffee(e, 0)}
+                    name="stock"
+                    error={errorMessage["coffee[0].stock"]}
+                  />
+                </div>
+                <div className="w-[20rem]">
+                  <Input
+                    type="text"
+                    placeholder="จำนวนสินค้า"
+                    value={input.coffee[1].stock}
+                    onChange={(e) => handleChangeCoffee(e, 1)}
+                    name="stock"
+                    error={errorMessage["coffee[1].stock"]}
+                  />
+                </div>
+                <div className="w-[20rem]">
+                  <Input
+                    type="text"
+                    placeholder="จำนวนสินค้า"
+                    value={input.coffee[2].stock}
+                    onChange={(e) => handleChangeCoffee(e, 2)}
+                    name="stock"
+                    error={errorMessage["coffee[2].stock"]}
+                  />
+                </div>
+              </div>
             </div>
           </>
         ) : (
@@ -209,7 +225,7 @@ export default function EditProductCoffee({ onSuccess, item, category }) {
         )}
       </div>
 
-      <div>
+      <div className="mb-2">
         <Span>เนื้อหาย่อย</Span>
         <Input
           type="text"
@@ -221,9 +237,11 @@ export default function EditProductCoffee({ onSuccess, item, category }) {
         />
       </div>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col mb-2">
         <Span>เนื้อหาหลัก</Span>
         <textarea
+          rows={5}
+          className="border rounded-lg w-full outline-none px-4 py-2 placeholder:text-[#707070] resize-none"
           placeholder="เนื้อหาหลัก"
           value={input.details}
           onChange={handleChangeInput}
@@ -234,16 +252,19 @@ export default function EditProductCoffee({ onSuccess, item, category }) {
         ) : null}
       </div>
 
-      <div>
+      <div className="flex flex-col gap-2 my-2 mb-4">
         <Span>รูปภาพ</Span>
-        <input
-          type="file"
-          onChange={(e) => {
-            if (e.target.files[0]) {
-              setFile(e.target.files[0]);
-            }
-          }}
-        />
+        <div className="border p-2 rounded-lg">
+          <input
+            className="px-2"
+            type="file"
+            onChange={(e) => {
+              if (e.target.files[0]) {
+                setFile(e.target.files[0]);
+              }
+            }}
+          />
+        </div>
       </div>
 
       <div className="flex h-9 justify-between">

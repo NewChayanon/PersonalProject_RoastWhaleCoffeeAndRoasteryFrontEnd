@@ -30,9 +30,9 @@ export default function StatusOrderTable() {
 
   return (
     <div>
-      <div className="flex justify-between">
-        <Span>สินค้า</Span>
-        <Span>สถานะออเดอร์</Span>
+      <div className="flex justify-between items-center py-3">
+        <Span size={20} width="SemiBold">สินค้า</Span>
+        <Span size={20} width="SemiBold">สถานะออเดอร์</Span>
       </div>
       {newShoppingList?.map((el) => (
         <StatusOrderList

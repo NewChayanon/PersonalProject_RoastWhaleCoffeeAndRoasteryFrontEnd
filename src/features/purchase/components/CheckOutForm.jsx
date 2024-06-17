@@ -31,14 +31,14 @@ const initialErrorMessage = {
   postcode: "",
 };
 const initialPayment = {
-  image:"wait",
+  image: "wait",
   date: "",
   hour: "",
   minute: "",
 };
 
 const initialPaymentError = {
-  image:"wait",
+  image: "wait",
   date: "",
   hour: "",
   minute: "",
@@ -98,180 +98,199 @@ export default function CheckOutForm() {
   };
 
   return (
-    <div className="flex justify-center items-start">
-      <form onSubmit={handleSubmitForm}>
-        <div>
-          <Span>ชำระเงิน</Span>
-        </div>
-        <div>
-          <div>
-            <Span>รายละเอียดลูกค้า</Span>
-            <div>
-              <Span>อีเมล : </Span>
-              <Span>{isUser?.email}</Span>
-            </div>
-            <div>
-              <Span>ชื่อ *</Span>
-              <Input
-                type="text"
-                placeholder="ชื่อ"
-                value={input.firstName}
-                onChange={handleChangeInput}
-                name="firstName"
-                error={errorMessage.firstName}
-              />
-            </div>
-            <div>
-              <Span>นามสกุล *</Span>
-              <Input
-                type="text"
-                placeholder="นามสกุล"
-                value={input.lastName}
-                onChange={handleChangeInput}
-                name="lastName"
-                error={errorMessage.lastName}
-              />
-            </div>
-            <div>
-              <Span>โทรศัพท์ *</Span>
-              <Input
-                type="text"
-                placeholder="โทรศัพท์"
-                value={input.mobile}
-                onChange={handleChangeInput}
-                name="mobile"
-                error={errorMessage.mobile}
-              />
-            </div>
-          </div>
-          <div>
-            <Span>รายละเอียดการจัดส่ง</Span>
-            <div>
-              <Span>ประเทศ/ภูมิภาค *</Span>
-              <Input
-                type="text"
-                placeholder="ประเทศ/ภูมิภาค"
-                value={input.country}
-                onChange={handleChangeInput}
-                name="country"
-                error={errorMessage.country}
-              />
-            </div>
-            <div>
-              <Span>ที่อยู่ *</Span>
-              <Input
-                type="text"
-                placeholder="ที่อยู่"
-                value={input.address}
-                onChange={handleChangeInput}
-                name="address"
-                error={errorMessage.address}
-              />
-            </div>
-            <div>
-              <Span>เมือง/อำเภอ *</Span>
-              <Input
-                type="text"
-                placeholder="เมือง/อำเภอ"
-                value={input.district}
-                onChange={handleChangeInput}
-                name="district"
-                error={errorMessage.district}
-              />
-            </div>
-            <div>
-              <Span>จังหวัด *</Span>
-              <Input
-                type="text"
-                placeholder="จังหวัด"
-                value={input.province}
-                onChange={handleChangeInput}
-                name="province"
-                error={errorMessage.province}
-              />
-            </div>
-            <div>
-              <Span>รหัสไปรษณีย์ *</Span>
-              <Input
-                type="text"
-                placeholder="รหัสไปรษณีย์"
-                value={input.postcode}
-                onChange={handleChangeInput}
-                name="postcode"
-                error={errorMessage.postcode}
-              />
-            </div>
-          </div>
-          <div>
-            <Span>ช่องทางชำระเงิน</Span>
-            <div className="bg-gray-300 w-auto h-40 p-2 ">
+    <div className="flex flex-col ">
+      <div className="flex justify-center pt-8 pb-4">
+        <Span size={40} width="ExtraBold">
+          ชำระเงิน
+        </Span>
+      </div>
+      <div className="flex justify-center items-start gap-5 my-4">
+        <form onSubmit={handleSubmitForm} className="w-[60rem] ">
+          <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-5">
+              <Span size={24} width="SemiBold">
+                รายละเอียดลูกค้า
+              </Span>
               <div>
-                <div></div>
-                <div>
-                  <Span>ชื่อ : นาย ชญานนท์ นิลปานะ</Span>
-                  <br />
-                  <Span>บัญชี : xxx-x-xxxxx-x</Span>
-                </div>
+                <Span>อีเมล : </Span>
+                <Span>{isUser?.email}</Span>
               </div>
-              <div className="flex gap-3">
-                <div className="flex flex-col">
-                  <Span>แนบสลิป *</Span>
-                  <input
-                    type="file"
-                    onChange={(e) => {
-                      if (e.target.files[0]) {
-                        setFile(e.target.files[0]);
-                      }
-                    }}
-                  />
-                  {errorMessageFile ? (
-                    <small className="text-red-500 px-2">
-                      {errorMessageFile}
-                    </small>
-                  ) : null}
-                </div>
+              <div>
+                <Span>ชื่อ<span className="text-red-400">*</span></Span>
+                <Input
+                  type="text"
+                  placeholder="ชื่อ"
+                  value={input.firstName}
+                  onChange={handleChangeInput}
+                  name="firstName"
+                  error={errorMessage.firstName}
+                />
+              </div>
+              <div>
+                <Span>นามสกุล<span className="text-red-400">*</span></Span>
+                <Input
+                  type="text"
+                  placeholder="นามสกุล"
+                  value={input.lastName}
+                  onChange={handleChangeInput}
+                  name="lastName"
+                  error={errorMessage.lastName}
+                />
+              </div>
+              <div>
+                <Span>โทรศัพท์<span className="text-red-400">*</span></Span>
+                <Input
+                  type="text"
+                  placeholder="โทรศัพท์"
+                  value={input.mobile}
+                  onChange={handleChangeInput}
+                  name="mobile"
+                  error={errorMessage.mobile}
+                />
+              </div>
+            </div>
+            <div className="flex flex-col gap-5">
+              <Span size={24} width="SemiBold">
+                รายละเอียดการจัดส่ง
+              </Span>
+              <div>
+                <Span>ประเทศ/ภูมิภาค<span className="text-red-400">*</span></Span>
+                <Input
+                  type="text"
+                  placeholder="ประเทศ/ภูมิภาค"
+                  value={input.country}
+                  onChange={handleChangeInput}
+                  name="country"
+                  error={errorMessage.country}
+                />
+              </div>
+              <div>
+                <Span>ที่อยู่<span className="text-red-400">*</span></Span>
+                <Input
+                  type="text"
+                  placeholder="ที่อยู่"
+                  value={input.address}
+                  onChange={handleChangeInput}
+                  name="address"
+                  error={errorMessage.address}
+                />
+              </div>
+              <div>
+                <Span>เมือง/อำเภอ<span className="text-red-400">*</span></Span>
+                <Input
+                  type="text"
+                  placeholder="เมือง/อำเภอ"
+                  value={input.district}
+                  onChange={handleChangeInput}
+                  name="district"
+                  error={errorMessage.district}
+                />
+              </div>
+              <div>
+                <Span>จังหวัด<span className="text-red-400">*</span></Span>
+                <Input
+                  type="text"
+                  placeholder="จังหวัด"
+                  value={input.province}
+                  onChange={handleChangeInput}
+                  name="province"
+                  error={errorMessage.province}
+                />
+              </div>
+              <div>
+                <Span>รหัสไปรษณีย์<span className="text-red-400">*</span></Span>
+                <Input
+                  type="text"
+                  placeholder="รหัสไปรษณีย์"
+                  value={input.postcode}
+                  onChange={handleChangeInput}
+                  name="postcode"
+                  error={errorMessage.postcode}
+                />
+              </div>
+            </div>
+
+            <div>
+              <Span size={24} width="SemiBold">
+                ช่องทางชำระเงิน
+              </Span>
+              <div className="bg-gray-300 w-auto h-40 px-4 py-4 my-2  rounded-lg">
                 <div>
-                  <Span>วันที่ชำระ *</Span>
-                  <Input
-                    type="text"
-                    placeholder="วันที่ชำระ"
-                    value={payment.date}
-                    onChange={handlePaymentInput}
-                    name="date"
-                    error={errorMessagePayment.date}
-                  />
+                  <div></div>
+                  <div>
+                    <Span>ชื่อ : นาย ชญานนท์ นิลปานะ</Span>
+                    <br />
+                    <Span>บัญชี : xxx-x-xxxxx-x</Span>
+                  </div>
                 </div>
-                <div>
-                  <Span>เวลาที่ชำระ *</Span>
-                  <div className="flex gap-3 items-center">
+                <div className="flex gap-3">
+                  <div className="flex flex-col">
+                    <Span>แนบสลิป<span className="text-red-400">*</span></Span>
+
+                    <div className="bg-white h-full flex justify-center items-center px-2 rounded-lg">
+                      <input
+                        
+                        type="file"
+                        onChange={(e) => {
+                          if (e.target.files[0]) {
+                            setFile(e.target.files[0]);
+                          }
+                        }}
+                      />
+                    </div>
+                    {errorMessageFile ? (
+                      <small className="text-red-500 px-2">
+                        {errorMessageFile}
+                      </small>
+                    ) : null}
+                  </div>
+                  <div>
+                    <Span>วันที่ชำระ<span className="text-red-400">*</span></Span>
                     <Input
                       type="text"
-                      placeholder="ชั่วโมง"
-                      value={payment.hour}
+                      placeholder="วันที่ชำระ (วัน/เดือน/ปี)"
+                      value={payment.date}
                       onChange={handlePaymentInput}
-                      name="hour"
-                      error={errorMessagePayment.hour}
-                    />{" "}
-                    <Span>:</Span>{" "}
-                    <Input
-                      type="text"
-                      placeholder="นาที"
-                      value={payment.minute}
-                      onChange={handlePaymentInput}
-                      name="minute"
-                      error={errorMessagePayment.minute}
+                      name="date"
+                      error={errorMessagePayment.date}
                     />
+                  </div>
+                  <div>
+                    <Span>เวลาที่ชำระ<span className="text-red-400">*</span></Span>
+                    <div className="flex gap-3 items-center">
+                      <div className="w-[5rem]">
+                        <Input
+                          type="text"
+                          placeholder="ชั่วโมง"
+                          value={payment.hour}
+                          onChange={handlePaymentInput}
+                          name="hour"
+                          error={errorMessagePayment.hour}
+                        />
+                      </div>
+                      <Span>:</Span>
+                      <div className="w-[5rem]">
+                        <Input
+                          type="text"
+                          placeholder="นาที"
+                          value={payment.minute}
+                          onChange={handlePaymentInput}
+                          name="minute"
+                          error={errorMessagePayment.minute}
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="h-7">
-          <Button>สั่งซื้อสินค้า</Button>
-        </div>
-      </form>
-      <Bill />
+          <div className="h-7">
+            <Button>สั่งซื้อสินค้า</Button>
+          </div>
+        </form>
+        <Bill />
+      </div>
     </div>
   );
 }

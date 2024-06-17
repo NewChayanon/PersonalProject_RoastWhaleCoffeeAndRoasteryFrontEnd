@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-
 import { RouterProvider } from "react-router-dom";
 import MainContainer from "../layouts/MainContainer";
 import HomePage from "../pages/HomePage";
@@ -13,7 +12,6 @@ import CheckOutPage from "../pages/ChackOutPage";
 import StatusOrderUserPage from "../pages/StatusOrderUserPage";
 import OrderPage from "../pages/OrderPage";
 import ProductInfo from "../pages/ProductInfo";
-import ProtectedRoute from "../features/authentication/ProtectedRoute";
 import ProtectedRouteAdmin from "../features/authentication/ProtectedRouteAdmin";
 import ProtectedRouteUser from "../features/authentication/ProtectedRouteUser";
 

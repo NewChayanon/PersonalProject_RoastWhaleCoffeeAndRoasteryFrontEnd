@@ -13,15 +13,15 @@ export default function Button({
   color = "Primary/950",
   size = 12,
   weight = "SemiBold",
-  round = "",
+  // round = "",
   children,
   type="submit",
-  onClick=""
-  
+  onClick="",
+  isButtonInCardTool =false
 }) {
   return (
     <button  type={type} onClick={onClick}
-      className={`${BACKGROUND_COLOR[bg]} ${TEXT_COLOR[color]} ${FONT_WEIGHT[weight]} ${TEXT_SIZE[size]} w-full rounded-lg h-full  `}
+      className={`${BACKGROUND_COLOR[bg]} ${TEXT_COLOR[color]} ${FONT_WEIGHT[weight]} ${TEXT_SIZE[size]} w-full rounded-lg h-full ${isButtonInCardTool?"":"active:scale-[95%]"} `}
     >
       {children}
     </button>

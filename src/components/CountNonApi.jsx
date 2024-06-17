@@ -4,7 +4,7 @@ import Span from './Span'
 
 export default function CountNonApi({decrement,quantity,increment}) {
   return (
-    <div className="border rounded-lg w-[5rem] flex justify-around">
+    <div className="border rounded-lg w-[5rem] flex justify-around h-8">
       <div className="p-1 flex justify-center items-center" onClick={decrement}>
         <Button bg="none">-</Button>
       </div>

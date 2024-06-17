@@ -44,7 +44,7 @@ export default function MenuRight() {
     <div className="flex">
       <Link to="/carts" className="flex mx-5">
         {!isUser?.["is_admin"] && (
-          <div className="relative flex justify-center items-center">
+          <div className="relative flex justify-center items-center hover:scale-[115%] active:scale-[100%] transition-all">
             <IconCart width={30} />
             {cartUser ? (
               <div className="bg-red-500 font-light text-sm absolute top-[-0.1rem] right-[-0.7rem] text-white p-1 h-6 w-6 rounded-full flex justify-center items-center">

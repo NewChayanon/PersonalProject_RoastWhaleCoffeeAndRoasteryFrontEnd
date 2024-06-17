@@ -32,6 +32,7 @@ export const TEXT_SIZE = {
   20: "text-xl",
   24: "text-2xl",
   36: "text-4xl",
+  40: "text-5xl",
 };
 
 export const FONT_WEIGHT = {

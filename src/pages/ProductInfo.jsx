@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import stockApi from "../apis/stock";
 import Span from "../components/Span";
 import ChooseBox from "../components/ChooseBox";
@@ -13,8 +13,7 @@ export default function ProductInfo() {
   const [quantity, setQuantity] = useState(1);
   const [sizeId, setSizeId] = useState(null);
   const { handleAddProductBySize, isUser } = useUser();
-
-  console.log(productInfo);
+  const navigate = useNavigate();
 
   const sumStock = productInfo?.product_and_size.reduce((acc, crr) => {
     if (crr.price !== 0) {
@@ -38,6 +37,9 @@ export default function ProductInfo() {
   const handleClickChooseSize = (id) => setSizeId(id);
 
   const handleSubmit = async () => {
+    if (!isUser) {
+      return navigate("/logins");
+    }
     const body = { quantity: quantity };
     await handleAddProductBySize(sizeId, body);
     setQuantity(1);
@@ -51,20 +53,33 @@ export default function ProductInfo() {
     fetchInfoProduct();
   }, [productId]);
   return (
-    <div className="flex justify-center gap-5">
+    <div className="flex justify-center gap-10 p-12">
       <div>
         <img
+          className="max-w-[35rem] rounded-lg"
           src={`http://localhost:8888/${productInfo?.image[0].image}`}
           alt="product-image"
         />
       </div>
-      <div>
-        <div className="flex flex-col">
-          <Span>{productInfo?.name}</Span>
-          <Span>{productInfo?.description}</Span>
-          <Span>{productInfo?.details}</Span>
-          <Span>{`มีสินค้าอยู่ ${sumStock}`}</Span>
-          <Span>{`ระยะเวลาการสั่ง : พร้อมจัดส่งภายใน 2 วันหลังสั่ง`}</Span>
+      <div className="max-w-[35rem]">
+        <div className="flex flex-col gap-2">
+          <Span size={24} width="SemiBold">
+            {productInfo?.name}
+          </Span>
+          <Span size={14} width="Light" color="Neutral/500">
+            {productInfo?.description}
+          </Span>
+          <Span size={14} width="Light" color="Neutral/500">
+            {productInfo?.details}
+          </Span>
+          <Span
+            width="SemiBold"
+            color="Support01/950"
+          >{`มีสินค้าอยู่ ${sumStock}`}</Span>
+          <Span
+            width="SemiBold"
+            color="Support01/950"
+          >{`ระยะเวลาการสั่ง : พร้อมจัดส่งภายใน 2 วันหลังสั่ง`}</Span>
         </div>
         {!isUser?.["is_admin"] ? (
           <div>
@@ -79,18 +94,20 @@ export default function ProductInfo() {
                 />
               ))}
             </div>
-            <div className="flex justify-center items-center">
-              <CountNonApi
-                decrement={handleDecrement}
-                quantity={quantity}
-                increment={handleIncrement}
-              />
-              <Button onClick={handleSubmit}>หยิบใส่ตะกร้า</Button>
+            <div className="flex gap-3 justify-center items-center">
+              <div>
+                <CountNonApi
+                  decrement={handleDecrement}
+                  quantity={quantity}
+                  increment={handleIncrement}
+                />
+              </div>
+              <div className="w-full h-8">
+                <Button onClick={handleSubmit}>หยิบใส่ตะกร้า</Button>
+              </div>
             </div>
           </div>
-        ) : (
-          null
-        )}
+        ) : null}
       </div>
     </div>
   );

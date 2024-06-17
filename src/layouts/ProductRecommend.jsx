@@ -6,11 +6,10 @@ import ProductContainer from "./ProductContainer";
 export default function ProductRecommend({ title }) {
   const { newProduct } = useStock();
   return (
-    <div>
-      
+    <div className="py-5">
       <div>
-        <div className="flex justify-center">
-          <Span>{title}</Span>
+        <div className="flex justify-center py-8">
+          <Span size={36} width="ExtraBold">{title}</Span>
         </div>
         <div className="flex justify-center gap-5">
           {newProduct?.map((el) => (

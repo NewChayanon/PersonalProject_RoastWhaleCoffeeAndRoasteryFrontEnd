@@ -6,7 +6,7 @@ export default function CartTableContent() {
   const { cartUser } = useUser();
  
   return (
-    <div className="w-[80rem]">
+    <div className="w-[60rem]">
       <CartTableColumn />
 
       {cartUser?.map((el) => (

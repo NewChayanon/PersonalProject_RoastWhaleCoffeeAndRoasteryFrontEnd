@@ -10,24 +10,16 @@ import { IconPayment } from "../../icons/icon";
 import AddProductForm from "../stock/components/AddProductForm";
 import PaymentZoom from "../../layouts/PaymentZoom";
 
-export default function OrderListAll({
-  id,
-  name,
-  description,
-  firstName,
-  lastName,
-  address,
-  price,
-  image,
-  status,
-}) {
+export default function OrderListAll({ id, name, description, firstName, lastName, address, price, image, status }) {
   const [open, setOpen] = useState(false);
 
   const { handlePending, handSuccess, handFailed } = useAdmin();
   return (
     <div className="grid grid-cols-6 py-6 px-2  gap-2 w-[80rem] border-t-[1px]">
       <div className="flex flex-col justify-center items-start">
-        <Span size={14} width="SemiBold">{name}</Span>
+        <Span size={14} width="SemiBold">
+          {name}
+        </Span>
         <Span size={11} width="Regular" color="Neutral/500">
           {description}
         </Span>
@@ -47,12 +39,7 @@ export default function OrderListAll({
         <IconPayment onClick={() => setOpen(true)} width={40} />
 
         {/* <Span>{image}</Span> */}
-        <Modal
-          open={open}
-          onClose={() => setOpen(false)}
-          title="หลักฐานการชำระ"
-          width={44}
-        >
+        <Modal open={open} onClose={() => setOpen(false)} title="หลักฐานการชำระ" width={44}>
           <PaymentZoom image={image} />
         </Modal>
       </div>
@@ -61,17 +48,17 @@ export default function OrderListAll({
       </div>
       <div className="flex justify-center">
         <div className="m-1 w-20 " onClick={() => handlePending(id)}>
-          <Button weight='Regular' bg="Neutral/500" color="white">
+          <Button weight="Regular" bg="Neutral/500" color="white">
             PENDING
           </Button>
         </div>
         <div className="m-1 w-20" onClick={() => handSuccess(id)}>
-          <Button weight='Regular' bg="Primary/500" color="black">
+          <Button weight="Regular" bg="Primary/500" color="black">
             SUCCESSED
           </Button>
         </div>
         <div className="m-1 w-20" onClick={() => handFailed(id)}>
-          <Button weight='Regular' bg="Support01/500" color="white">
+          <Button weight="Regular" bg="Support01/500" color="white">
             FAILED
           </Button>
         </div>

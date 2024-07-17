@@ -1,6 +1,6 @@
-import axios from '../config/axios'
+import axios from "../config/axios";
 const authApi = {};
 
-authApi.register = (body) =>  axios.post("http://localhost:8888/registers", body);
+authApi.register = (body) => axios.post("/auth/register", body);
 
-export default authApi
+export default authApi;

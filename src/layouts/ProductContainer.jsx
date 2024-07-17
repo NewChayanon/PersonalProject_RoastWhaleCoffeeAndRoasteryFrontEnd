@@ -10,15 +10,7 @@ import { BACKGROUND_COLOR } from "../constants/InfoFigma";
 import { Link, useNavigate } from "react-router-dom";
 import formatCurrency from "../utils/currency-format";
 
-
-export default function ProductContainer({
-  id,
-  name,
-  description,
-  item,
-  category,
-  src,
-}) {
+export default function ProductContainer({ id, name, description, item, category, src }) {
   const [open, setOpen] = useState(false);
   const { handleClickAddCoffeeToCart, isUser } = useUser();
 
@@ -43,17 +35,16 @@ export default function ProductContainer({
   );
 
   return (
-    <div className="w-[260px] max-h-[425px]  flex flex-col justify-between border rounded-lg border-[#FDEACE] hover:scale-[105%] active:scale-100 transition-all">
+    <div className="w-[260px] max-h-[425px]  flex flex-col justify-between border rounded-lg border-[#FDEACE] shadow-md hover:scale-[105%] active:scale-100 transition-all">
       <div>
         <Link className="relative" to={`/product/${id}`}>
-          <img className="max-h-[16rem] w-96 rounded-t-lg "
+          <img
+            className="max-h-[16rem] w-96 rounded-t-lg "
             src={src ? `http://localhost:8888/${src.image}` : testImage}
             alt="test-image"
           />
 
-          <div
-            className={`absolute top-2 right-4 ${BACKGROUND_COLOR["Support02/500"]} py-1 px-2 rounded-md`}
-          >
+          <div className={`absolute top-2 right-4 ${BACKGROUND_COLOR["Support02/500"]} py-1 px-2 rounded-md`}>
             <Span size={14} width="SemiBold">{`฿ ${formatCurrency(lowestPrice.lowestPrice)}`}</Span>
           </div>
         </Link>
@@ -72,27 +63,20 @@ export default function ProductContainer({
         <div className=" h-7">
           <Button isButtonInCardTool={true}>
             {isUser?.["is_admin"] ? (
-              <div onClick={() => setOpen(true)}>
-                <Span size={12} width="SemiBold" color="Support01/950" >Edit</Span>
-                <Modal
-                  open={open}
-                  onClose={() => setOpen(false)}
-                  title="เพิ่ม / อัพเดท สินค้า"
-                  width={44}
-                >
-                  <EditProductCoffee
-                    item={item}
-                    category={category}
-                    onSuccess={() => setOpen(false)}
-                  />
+              <div onClick={() => setOpen(true)} className="h-full flex justify-center items-center">
+                <Span size={12} width="SemiBold" color="Support01/950">
+                  Edit
+                </Span>
+                <Modal open={open} onClose={() => setOpen(false)} title="เพิ่ม / อัพเดท สินค้า" width={44}>
+                  <EditProductCoffee item={item} category={category} onSuccess={() => setOpen(false)} />
                 </Modal>
               </div>
             ) : (
-              
-                <div onClick={handleCheckUser}>
-                  <Span size={12} width="SemiBold" color="Support01/950">Add to cart</Span>
-                </div>
-              
+              <div className="h-full flex justify-center items-center" onClick={handleCheckUser}>
+                <Span size={12} width="SemiBold" color="Support01/950">
+                  Add to cart
+                </Span>
+              </div>
             )}
           </Button>
         </div>

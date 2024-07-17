@@ -2,37 +2,19 @@ import axios from "../config/axios";
 
 const userApi = {};
 
-userApi.Login = (body) => axios.post("http://localhost:8888/logins", body);
+userApi.getUser = () => axios.get(`/users`);
+userApi.cartUser = () => axios.get("/users/cart");
+userApi.getShoppingList = () => axios.get(`/users/orders`);
 
-userApi.getUser = () => axios.get(`http://localhost:8888/users`);
+userApi.updatePaymentImage = (formData) => axios.patch(`/users/payment`, formData);
 
-userApi.quickAdd = (productId, body) =>
-  axios.post(`http://localhost:8888/users/quick-add-product/${productId}`, body);
+userApi.Login = (body) => axios.post("/auth/login", body);
+userApi.address = (body) => axios.post(`/users/address`, body);
+userApi.payment = (body) => axios.post(`/users/checkout`, body);
+userApi.quickAdd = (productId, body) => axios.post(`/users/cart/products/${productId}/quick-add`, body);
+userApi.addProduct = (productAndSizeId, body) => axios.post(`/users/add-product/${productAndSizeId}`, body);
+userApi.addAndUpdateProduct = (productAndSizeId, body) => axios.post(`/users/add-product/${productAndSizeId}`, body);
 
-userApi.cartUser = () => axios.get("http://localhost:8888/users/cart");
-
-userApi.addAndUpdateProduct = (productAndSizeId, body) =>
-  axios.post(`http://localhost:8888/users/add-product/${productAndSizeId}`, body);
-
-userApi.deleteProductInCart = (cartItemId) =>
-  axios.delete(`http://localhost:8888/users/remove/${cartItemId}`);
-
-userApi.address = (body) =>
-  axios.post(`http://localhost:8888/users/address`, body);
-
-userApi.payment = (body) =>
-  axios.post(`http://localhost:8888/users/check-out`, body);
-
-userApi.getShoppingList = () =>
-  axios.get(`http://localhost:8888/users/shopping-list`);
-
-userApi.updatePaymentImage = (formData) =>
-  axios.patch(`http://localhost:8888/users/payment`, formData);
-
-userApi.addProduct = (productAndSizeId, body) =>
-  axios.post(
-    `http://localhost:8888/users/add-product/${productAndSizeId}`,
-    body
-  );
+userApi.deleteProductInCart = (cartItemId) => axios.delete(`/users/cart/products/${cartItemId}`);
 
 export default userApi;

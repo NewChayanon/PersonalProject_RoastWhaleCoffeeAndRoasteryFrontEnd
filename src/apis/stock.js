@@ -1,27 +1,19 @@
 import axios from "../config/axios";
 const stockApi = {};
 
-// add product image
-stockApi.addProductImage = (formData) =>
-  axios.post("http://localhost:8888/admin/add-product-image", formData);
-
-stockApi.addProduct = (body) =>
-  axios.post("http://localhost:8888/admin/add-product-coffee", body);
-
-stockApi.getCoffee = () => axios.get("http://localhost:8888/product/coffee");
-
-stockApi.getTool = () => axios.get("http://localhost:8888/product/tool");
-
-stockApi.getNewProduct = () => axios.get("http://localhost:8888/product/new");
+stockApi.getTool = () => axios.get("/products/tools");
+stockApi.getCoffee = () => axios.get("/products/coffees");
+stockApi.getNewProduct = () => axios.get("/products/new-arrivals");
+stockApi.getProductInfo = (productId) => axios.get(`/products/${productId}`);
 
 // edit coffee product
-stockApi.editCoffeeProduct = (body) =>
-  axios.patch(`http://localhost:8888/admin/edit-coffee-product`, body);
+stockApi.editCoffeeProduct = (body) => axios.patch(`/admin/products`, body);
 
 // delete coffee product
-stockApi.deleteCoffeeProduct = (id) =>
-  axios.patch(`http://localhost:8888/admin/remove-product/${id}`);
+stockApi.deleteCoffeeProduct = (id) => axios.patch(`/admin/products/${id}/remove`);
 
-stockApi.getProductInfo = (productId)=> axios.get(`http://localhost:8888/product/${productId}`)
+// add product image
+stockApi.addProductImage = (formData) => axios.post("/admin/products/images", formData);
+stockApi.addProduct = (body) => axios.post("/admin/products", body);
 
 export default stockApi;

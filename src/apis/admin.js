@@ -1,12 +1,8 @@
 import axios from "../config/axios";
 const adminApi = {};
 
-adminApi.getAllOrder = () =>
-  axios.get("http://localhost:8888/admin/order-list");
+adminApi.getAllOrder = () => axios.get("/admin/orders");
 
-adminApi.updateStatusOrder = (orderId, body) =>
-  axios.patch(`http://localhost:8888/admin/order/${orderId}`, body);
-
-
+adminApi.updateStatusOrder = (orderId, body) => axios.patch(`/admin/orders/${orderId}`, body);
 
 export default adminApi;

@@ -2,7 +2,6 @@ import Logo from "./Logo";
 import MenuCenter from "./MenuCenter";
 import MenuRight from "./MenuRight";
 
-
 export default function Header() {
   return (
     <header className="bg-[#190F01] h-20 flex sticky top-0 w-full z-50 ">

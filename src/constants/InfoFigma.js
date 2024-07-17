@@ -7,7 +7,7 @@ export const BACKGROUND_COLOR = {
   "Support01/500": "bg-[#603709]",
   "Support02/200": "bg-[#FFD399]",
   "Support02/500": "bg-[#FFF9F1]",
-  none:""
+  none: "",
 };
 
 export const TEXT_COLOR = {
@@ -19,8 +19,8 @@ export const TEXT_COLOR = {
   "Support01/200": "text-[#F6CFA2]",
   "Support01/500": "text-[#603709]",
   "Support01/950": "text-[#170D02]",
-  white:"text-white",
-  black:"text-black"
+  white: "text-white",
+  black: "text-black",
 };
 
 export const TEXT_SIZE = {
@@ -36,7 +36,7 @@ export const TEXT_SIZE = {
 };
 
 export const FONT_WEIGHT = {
-  Light:"font-light",
+  Light: "font-light",
   Regular: "font-normal",
   SemiBold: "font-semibold",
   ExtraBold: "font-extrabold",

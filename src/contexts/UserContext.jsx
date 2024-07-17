@@ -2,7 +2,6 @@
 import { createContext, useEffect, useState } from "react";
 import userApi from "../apis/user";
 import { getAccessToken, removeAccessToken, setAccessToken } from "../utils/local-storage";
-import { useNavigate } from "react-router-dom";
 
 export const UserContext = createContext();
 
@@ -77,7 +76,6 @@ export const UserContextProvider = ({ children }) => {
   };
 
   const handleAddProductBySize = async (productAndSizeId, body) => {
-    console.log(productAndSizeId, body);
     const res = await userApi.addProduct(productAndSizeId, body);
     setRes(res.data);
   };

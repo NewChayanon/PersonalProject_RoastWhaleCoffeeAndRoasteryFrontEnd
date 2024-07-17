@@ -21,7 +21,6 @@ export default function MenuRight() {
   const navigate = useNavigate();
 
   const sumItemInCart = cartUser?.length > 9 ? "9+" : cartUser?.length;
-  
 
   const dropdownUser = [
     { id: uuidv4(), title: isUser?.["email"], width: "SemiBold" },
@@ -55,11 +54,7 @@ export default function MenuRight() {
         )}
       </Link>
       {isUser ? (
-        <div
-          role="button"
-          className="relative rounded-full"
-          onClick={() => setOpen((prev) => !prev)}
-        >
+        <div role="button" className="relative rounded-full" onClick={() => setOpen((prev) => !prev)}>
           <IconUser width={40} />
 
           {open && (

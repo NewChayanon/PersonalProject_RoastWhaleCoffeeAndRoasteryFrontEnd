@@ -7,7 +7,6 @@ import Modal from "../../components/Modal";
 import Span from "../../components/Span";
 import { useAdmin } from "../../hooks/useAdmin";
 import { IconPayment } from "../../icons/icon";
-import AddProductForm from "../stock/components/AddProductForm";
 import PaymentZoom from "../../layouts/PaymentZoom";
 
 export default function OrderListAll({ id, name, description, firstName, lastName, address, price, image, status }) {
@@ -38,7 +37,6 @@ export default function OrderListAll({ id, name, description, firstName, lastNam
       <div className="flex justify-center items-center">
         <IconPayment onClick={() => setOpen(true)} width={40} />
 
-        {/* <Span>{image}</Span> */}
         <Modal open={open} onClose={() => setOpen(false)} title="หลักฐานการชำระ" width={44}>
           <PaymentZoom image={image} />
         </Modal>

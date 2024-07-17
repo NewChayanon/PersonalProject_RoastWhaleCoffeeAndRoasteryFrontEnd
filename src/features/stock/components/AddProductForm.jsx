@@ -3,10 +3,7 @@ import { useState } from "react";
 import Button from "../../../components/Button";
 import Input from "../../../components/Input";
 import Span from "../../../components/Span";
-import {
-  addCoffeeProductValidator,
-  handleValidateCoffee,
-} from "../../../validators/validators";
+import { addCoffeeProductValidator, handleValidateCoffee } from "../../../validators/validators";
 import { useStock } from "../../../hooks/useStock";
 
 export default function AddProductForm({ onSuccess, category }) {
@@ -69,9 +66,7 @@ export default function AddProductForm({ onSuccess, category }) {
   const handleChangeCoffee = (e, index) => {
     setInput({
       ...input,
-      coffee: input.coffee.map((item, i) =>
-        i === index ? { ...item, [e.target.name]: e.target.value } : item
-      ),
+      coffee: input.coffee.map((item, i) => (i === index ? { ...item, [e.target.name]: e.target.value } : item)),
     });
   };
 
@@ -246,9 +241,7 @@ export default function AddProductForm({ onSuccess, category }) {
           onChange={handleChangeInput}
           name="details"
         ></textarea>
-        {errorMessage.details ? (
-          <small className="text-red-500 px-2">{errorMessage.details}</small>
-        ) : null}
+        {errorMessage.details ? <small className="text-red-500 px-2">{errorMessage.details}</small> : null}
       </div>
 
       <div className="flex flex-col gap-2 my-2 mb-4">
@@ -263,9 +256,7 @@ export default function AddProductForm({ onSuccess, category }) {
             }}
           />
         </div>
-        {errorMessageFile ? (
-          <small className="text-red-500 px-2">{errorMessageFile}</small>
-        ) : null}
+        {errorMessageFile ? <small className="text-red-500 px-2">{errorMessageFile}</small> : null}
       </div>
 
       <div className="flex h-9 justify-center">

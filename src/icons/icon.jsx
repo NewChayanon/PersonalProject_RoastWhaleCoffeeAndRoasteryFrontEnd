@@ -30,8 +30,12 @@ export function IconYoutube({ width }) {
   return <img style={{ width: `${width}px` }} src={youtube} alt="icon-youtube" />;
 }
 
-export const IconUser = ({ width }) => <img style={{ width: `${width}px` }} src={user} alt="icon-user" className="rounded-full" />;
+export const IconUser = ({ width }) => (
+  <img style={{ width: `${width}px` }} src={user} alt="icon-user" className="rounded-full" />
+);
 
-export const IconPayment = ({ width, onClick }) => <img role="button" onClick={onClick} style={{ width: `${width}px` }} src={payment} alt="icon-payment" />;
+export const IconPayment = ({ width, onClick }) => (
+  <img role="button" onClick={onClick} style={{ width: `${width}px` }} src={payment} alt="icon-payment" />
+);
 
 export const IconGoogle = ({ width }) => <img style={{ width: `${width}px` }} src={google} alt="icon-google" />;

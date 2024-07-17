@@ -32,8 +32,7 @@ export default function LoginForm() {
         return setErrorMessage(error);
       }
       setErrorMessage(initialErrorMessage);
-      const res = await handleLogin(input);
-      // navigate(`/users/${res.data.user.id}`)
+      await handleLogin(input);
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -51,7 +50,11 @@ export default function LoginForm() {
           </Button>
         </div>
 
-        <div role="button" className="flex justify-center items-center gap-4 w-full rounded-lg h-10 border shadow-sm active:scale-[98%]" onClick={handleGoogleLogin}>
+        <div
+          role="button"
+          className="flex justify-center items-center gap-4 w-full rounded-lg h-10 border shadow-sm active:scale-[98%]"
+          onClick={handleGoogleLogin}
+        >
           <IconGoogle width={20} />
           <Span size={16} color="Primary/950">
             Continue with Google

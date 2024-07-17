@@ -12,7 +12,7 @@ export default function CartTableColumn() {
     <div className="grid grid-cols-4">
       {column.map((el) => (
         <div key={el.id} className="flex justify-center p-2">
-          <Span  size={20} width="SemiBold">
+          <Span size={20} width="SemiBold">
             {el.title}
           </Span>
         </div>

@@ -1,15 +1,11 @@
+/* eslint-disable react/prop-types */
+import { useUser } from "../../hooks/useUser";
+import { Navigate } from "react-router-dom";
 
-import { useUser } from '../../hooks/useUser'
-import { Navigate } from 'react-router-dom'
-
-export default function ProtectedRouteUser({children}) {
-    const {isUser} = useUser()
-    if (isUser?.["is_admin"] || !isUser) {
-        return <Navigate to="/"/>
-    }
-  return (
-    <>
-    {children}
-    </>
-  )
+export default function ProtectedRouteUser({ children }) {
+  const { isUser } = useUser();
+  if (isUser?.["is_admin"] || !isUser) {
+    return <Navigate to="/" />;
+  }
+  return <>{children}</>;
 }

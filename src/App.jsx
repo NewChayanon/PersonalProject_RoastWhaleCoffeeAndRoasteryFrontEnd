@@ -1,4 +1,3 @@
-
 import { UserContextProvider } from "./contexts/UserContext";
 import Router from "./routes/route";
 

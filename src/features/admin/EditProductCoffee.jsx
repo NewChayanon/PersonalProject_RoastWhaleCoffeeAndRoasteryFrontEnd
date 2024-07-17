@@ -2,10 +2,7 @@
 
 import { useState } from "react";
 import { useStock } from "../../hooks/useStock";
-import {
-  editProductValidator,
-  handleValidateCoffee,
-} from "../../validators/validators";
+import { editProductValidator, handleValidateCoffee } from "../../validators/validators";
 import Span from "../../components/Span";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
@@ -80,9 +77,7 @@ export default function EditProductCoffee({ onSuccess, item, category }) {
   const handleChangeCoffee = (e, index) => {
     setInput({
       ...input,
-      coffee: input.coffee.map((item, i) =>
-        i === index ? { ...item, [e.target.name]: e.target.value } : item
-      ),
+      coffee: input.coffee.map((item, i) => (i === index ? { ...item, [e.target.name]: e.target.value } : item)),
     });
   };
 
@@ -247,9 +242,7 @@ export default function EditProductCoffee({ onSuccess, item, category }) {
           onChange={handleChangeInput}
           name="details"
         ></textarea>
-        {errorMessage.details ? (
-          <small className="text-red-500 px-2">{errorMessage.details}</small>
-        ) : null}
+        {errorMessage.details ? <small className="text-red-500 px-2">{errorMessage.details}</small> : null}
       </div>
 
       <div className="flex flex-col gap-2 my-2 mb-4">

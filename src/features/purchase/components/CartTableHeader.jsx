@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import Span from "../../../components/Span";
 
-
-export default function CartTableHeader({title}) {
+export default function CartTableHeader({ title }) {
   return (
     <div>
-        <Span size={24} width="SemiBold">{title}</Span>
+      <Span size={24} width="SemiBold">
+        {title}
+      </Span>
     </div>
-  )
+  );
 }

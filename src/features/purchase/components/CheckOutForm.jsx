@@ -1,10 +1,7 @@
 import { useState } from "react";
 import Input from "../../../components/Input";
 import Span from "../../../components/Span";
-import {
-  addressValidate,
-  paymentValidate,
-} from "../../../validators/validators";
+import { addressValidate, paymentValidate } from "../../../validators/validators";
 import Button from "../../../components/Button";
 import Bill from "./Bill";
 import { useUser } from "../../../hooks/useUser";
@@ -48,19 +45,16 @@ export default function CheckOutForm() {
   const [input, setInput] = useState(initialInput);
   const [errorMessage, setErrorMessage] = useState(initialErrorMessage);
   const [payment, setPayment] = useState(initialPayment);
-  const [errorMessagePayment, setErrorMessagePayment] =
-    useState(initialPaymentError);
+  const [errorMessagePayment, setErrorMessagePayment] = useState(initialPaymentError);
   const [file, setFile] = useState(null);
   const [errorMessageFile, setErrorMessageFile] = useState("");
   const { isUser, checkOutCart } = useUser();
 
   const navigator = useNavigate();
 
-  const handleChangeInput = (e) =>
-    setInput({ ...input, [e.target.name]: e.target.value });
+  const handleChangeInput = (e) => setInput({ ...input, [e.target.name]: e.target.value });
 
-  const handlePaymentInput = (e) =>
-    setPayment({ ...payment, [e.target.name]: e.target.value });
+  const handlePaymentInput = (e) => setPayment({ ...payment, [e.target.name]: e.target.value });
 
   const handleSubmitForm = async (e) => {
     try {
@@ -116,7 +110,9 @@ export default function CheckOutForm() {
                 <Span>{isUser?.email}</Span>
               </div>
               <div>
-                <Span>ชื่อ<span className="text-red-400">*</span></Span>
+                <Span>
+                  ชื่อ<span className="text-red-400">*</span>
+                </Span>
                 <Input
                   type="text"
                   placeholder="ชื่อ"
@@ -127,7 +123,9 @@ export default function CheckOutForm() {
                 />
               </div>
               <div>
-                <Span>นามสกุล<span className="text-red-400">*</span></Span>
+                <Span>
+                  นามสกุล<span className="text-red-400">*</span>
+                </Span>
                 <Input
                   type="text"
                   placeholder="นามสกุล"
@@ -138,7 +136,9 @@ export default function CheckOutForm() {
                 />
               </div>
               <div>
-                <Span>โทรศัพท์<span className="text-red-400">*</span></Span>
+                <Span>
+                  โทรศัพท์<span className="text-red-400">*</span>
+                </Span>
                 <Input
                   type="text"
                   placeholder="โทรศัพท์"
@@ -154,7 +154,9 @@ export default function CheckOutForm() {
                 รายละเอียดการจัดส่ง
               </Span>
               <div>
-                <Span>ประเทศ/ภูมิภาค<span className="text-red-400">*</span></Span>
+                <Span>
+                  ประเทศ/ภูมิภาค<span className="text-red-400">*</span>
+                </Span>
                 <Input
                   type="text"
                   placeholder="ประเทศ/ภูมิภาค"
@@ -165,7 +167,9 @@ export default function CheckOutForm() {
                 />
               </div>
               <div>
-                <Span>ที่อยู่<span className="text-red-400">*</span></Span>
+                <Span>
+                  ที่อยู่<span className="text-red-400">*</span>
+                </Span>
                 <Input
                   type="text"
                   placeholder="ที่อยู่"
@@ -176,7 +180,9 @@ export default function CheckOutForm() {
                 />
               </div>
               <div>
-                <Span>เมือง/อำเภอ<span className="text-red-400">*</span></Span>
+                <Span>
+                  เมือง/อำเภอ<span className="text-red-400">*</span>
+                </Span>
                 <Input
                   type="text"
                   placeholder="เมือง/อำเภอ"
@@ -187,7 +193,9 @@ export default function CheckOutForm() {
                 />
               </div>
               <div>
-                <Span>จังหวัด<span className="text-red-400">*</span></Span>
+                <Span>
+                  จังหวัด<span className="text-red-400">*</span>
+                </Span>
                 <Input
                   type="text"
                   placeholder="จังหวัด"
@@ -198,7 +206,9 @@ export default function CheckOutForm() {
                 />
               </div>
               <div>
-                <Span>รหัสไปรษณีย์<span className="text-red-400">*</span></Span>
+                <Span>
+                  รหัสไปรษณีย์<span className="text-red-400">*</span>
+                </Span>
                 <Input
                   type="text"
                   placeholder="รหัสไปรษณีย์"
@@ -225,11 +235,12 @@ export default function CheckOutForm() {
                 </div>
                 <div className="flex gap-3">
                   <div className="flex flex-col">
-                    <Span>แนบสลิป<span className="text-red-400">*</span></Span>
+                    <Span>
+                      แนบสลิป<span className="text-red-400">*</span>
+                    </Span>
 
                     <div className="bg-white h-full flex justify-center items-center px-2 rounded-lg">
                       <input
-                        
                         type="file"
                         onChange={(e) => {
                           if (e.target.files[0]) {
@@ -238,14 +249,12 @@ export default function CheckOutForm() {
                         }}
                       />
                     </div>
-                    {errorMessageFile ? (
-                      <small className="text-red-500 px-2">
-                        {errorMessageFile}
-                      </small>
-                    ) : null}
+                    {errorMessageFile ? <small className="text-red-500 px-2">{errorMessageFile}</small> : null}
                   </div>
                   <div>
-                    <Span>วันที่ชำระ<span className="text-red-400">*</span></Span>
+                    <Span>
+                      วันที่ชำระ<span className="text-red-400">*</span>
+                    </Span>
                     <Input
                       type="text"
                       placeholder="วันที่ชำระ (วัน/เดือน/ปี)"
@@ -256,7 +265,9 @@ export default function CheckOutForm() {
                     />
                   </div>
                   <div>
-                    <Span>เวลาที่ชำระ<span className="text-red-400">*</span></Span>
+                    <Span>
+                      เวลาที่ชำระ<span className="text-red-400">*</span>
+                    </Span>
                     <div className="flex gap-3 items-center">
                       <div className="w-[5rem]">
                         <Input

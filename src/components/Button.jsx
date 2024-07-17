@@ -16,7 +16,9 @@ export default function Button({
     <button
       type={type}
       onClick={onClick}
-      className={`${BACKGROUND_COLOR[bg]} ${TEXT_COLOR[color]} ${FONT_WEIGHT[weight]} ${TEXT_SIZE[size]} w-full rounded-lg h-full ${isButtonInCardTool ? "" : "active:scale-[95%]"} `}
+      className={`${BACKGROUND_COLOR[bg]} ${TEXT_COLOR[color]} ${FONT_WEIGHT[weight]} ${
+        TEXT_SIZE[size]
+      } w-full rounded-lg h-full ${isButtonInCardTool ? "" : "active:scale-[95%]"} `}
     >
       {children}
     </button>

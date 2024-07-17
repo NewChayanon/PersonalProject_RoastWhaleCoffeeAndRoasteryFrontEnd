@@ -4,7 +4,7 @@ import CartTableColumn from "./CartTableColumn";
 
 export default function CartTableContent() {
   const { cartUser } = useUser();
- 
+
   return (
     <div className="w-[60rem]">
       <CartTableColumn />
@@ -19,7 +19,6 @@ export default function CartTableContent() {
           price={el["product_and_size"].price}
           quantity={el.quantity}
           src={el["product_and_size"].product.image[0].image}
-          
         />
       ))}
     </div>

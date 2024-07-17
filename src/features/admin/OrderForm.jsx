@@ -19,19 +19,29 @@ export default function OrderForm() {
         </div>
         <div className="grid grid-cols-6 w-[80rem]  ">
           <div className="flex justify-center p-2">
-            <Span size={20} width="SemiBold">สินค้า</Span>
+            <Span size={20} width="SemiBold">
+              สินค้า
+            </Span>
           </div>
           <div className="flex justify-center p-2">
-            <Span size={20} width="SemiBold">ชื่อลูกค้า</Span>
+            <Span size={20} width="SemiBold">
+              ชื่อลูกค้า
+            </Span>
           </div>
           <div className="flex justify-center p-2">
-            <Span size={20} width="SemiBold">ราคา</Span>
+            <Span size={20} width="SemiBold">
+              ราคา
+            </Span>
           </div>
           <div className="flex justify-center p-2">
-            <Span size={20} width="SemiBold">หลักฐานการชำระ</Span>
+            <Span size={20} width="SemiBold">
+              หลักฐานการชำระ
+            </Span>
           </div>
           <div className="flex justify-center p-2">
-            <Span size={20} width="SemiBold">สถานะออเดอร์</Span>
+            <Span size={20} width="SemiBold">
+              สถานะออเดอร์
+            </Span>
           </div>
         </div>
         {/* prepareOrder = {id:"",name:"",description:"",firstName:"",lastName:"",address:"",price:"",image:"",status:""} */}

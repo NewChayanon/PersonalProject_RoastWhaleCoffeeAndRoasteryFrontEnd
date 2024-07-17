@@ -18,10 +18,14 @@ export default function CartContainer() {
             <CartTable />
             <div className="flex justify-end gap-3 mt-3">
               <Link className=" w-32 h-8" to={"/product-coffees"}>
-                <Button size={16} weight="Regular" >ซื้อสินค้าต่อ</Button>
+                <Button size={16} weight="Regular">
+                  ซื้อสินค้าต่อ
+                </Button>
               </Link>
-              <Link className="w-32 h-8" to={cartUser.length != 0 ?"/check-out":null}>
-                <Button size={16} weight="Regular" >สั่งซื้อสินค้า</Button>
+              <Link className="w-32 h-8" to={cartUser.length != 0 ? "/check-out" : null}>
+                <Button size={16} weight="Regular">
+                  สั่งซื้อสินค้า
+                </Button>
               </Link>
             </div>
           </div>

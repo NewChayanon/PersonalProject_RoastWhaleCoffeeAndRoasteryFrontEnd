@@ -1,14 +1,8 @@
 import { Link } from "react-router-dom";
 import Span from "../components/Span";
-import {
-  IconTwitter,
-  IconFacebook,
-  IconInstagram,
-  IconYoutube,
-} from "../icons/icon";
+import { IconTwitter, IconFacebook, IconInstagram, IconYoutube } from "../icons/icon";
 import Logo from "./Logo";
 import { v4 as uuidv4 } from "uuid";
-
 
 const IconFooter = [
   { id: uuidv4(), icon: IconFacebook, to: "https://www.facebook.com/" },

@@ -1,19 +1,18 @@
 /* eslint-disable react/prop-types */
 import { useEffect } from "react";
-import { createPortal } from 'react-dom';
-
+import { createPortal } from "react-dom";
 
 export default function Modal({ width = 30, title, children, open, onClose }) {
-    useEffect(() => {
-        const handlePressEsc = e => {
-          if (e.keyCode === 27) {
-            onClose?.();
-          }
-        };
-        document.addEventListener('keydown', handlePressEsc);
-        return () => document.removeEventListener('keydown', handlePressEsc);
-      }, [onClose]);
-    
+  useEffect(() => {
+    const handlePressEsc = (e) => {
+      if (e.keyCode === 27) {
+        onClose?.();
+      }
+    };
+    document.addEventListener("keydown", handlePressEsc);
+    return () => document.removeEventListener("keydown", handlePressEsc);
+  }, [onClose]);
+
   return (
     <>
       {open
@@ -25,10 +24,12 @@ export default function Modal({ width = 30, title, children, open, onClose }) {
                   <div
                     className="bg-white rounded-lg shadow-lg"
                     style={{ width: `${width}rem` }}
-                    onMouseDown={e => e.stopPropagation()}
+                    onMouseDown={(e) => e.stopPropagation()}
                   >
                     <div className="flex justify-between items-center p-4 border-b">
-                      <button className="invisible" onClick={onClose}>&#10005;</button>
+                      <button className="invisible" onClick={onClose}>
+                        &#10005;
+                      </button>
                       <h5 className="text-2xl font-medium">{title}</h5>
                       <button onMouseDown={onClose}>&#10005;</button>
                     </div>
@@ -37,9 +38,9 @@ export default function Modal({ width = 30, title, children, open, onClose }) {
                 </div>
               </div>
             </>,
-            document.getElementById('modal')
+            document.getElementById("modal")
           )
         : null}
     </>
-  )
+  );
 }

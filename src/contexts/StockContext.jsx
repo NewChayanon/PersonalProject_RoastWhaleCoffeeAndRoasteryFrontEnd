@@ -36,7 +36,6 @@ export const StockContextProvider = ({ children }) => {
     }
   };
   const handleDeleteCoffee = async (id) => {
-    console.log(id);
     const resDeleteCoffee = await stockApi.deleteCoffeeProduct(id);
     setRes(resDeleteCoffee.data);
   };

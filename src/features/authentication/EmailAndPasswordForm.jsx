@@ -2,7 +2,7 @@
 import Span from "../../components/Span";
 import Input from "../../components/Input";
 
-export default function EmailAndPasswordForm({title, input, onChange, error }) {
+export default function EmailAndPasswordForm({ title, input, onChange, error }) {
   return (
     <>
       <div className="py-10">

@@ -1,8 +1,8 @@
+import Button from "./Button";
+import Span from "./Span";
 
-import Button from './Button'
-import Span from './Span'
-
-export default function CountNonApi({decrement,quantity,increment}) {
+// eslint-disable-next-line react/prop-types
+export default function CountNonApi({ decrement, quantity, increment }) {
   return (
     <div className="border rounded-lg w-[5rem] flex justify-around h-8">
       <div className="p-1 flex justify-center items-center" onClick={decrement}>
@@ -15,5 +15,5 @@ export default function CountNonApi({decrement,quantity,increment}) {
         <Button bg="none">+</Button>
       </div>
     </div>
-  )
+  );
 }

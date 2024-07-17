@@ -1,12 +1,5 @@
 /* eslint-disable react/prop-types */
-import {
-  BACKGROUND_COLOR,
-  FONT_WEIGHT,
-  TEXT_COLOR,
-  TEXT_SIZE,
-} from "../constants/InfoFigma";
-
-
+import { BACKGROUND_COLOR, FONT_WEIGHT, TEXT_COLOR, TEXT_SIZE } from "../constants/InfoFigma";
 
 export default function Button({
   bg = "Primary/500",
@@ -15,13 +8,15 @@ export default function Button({
   weight = "SemiBold",
   // round = "",
   children,
-  type="submit",
-  onClick="",
-  isButtonInCardTool =false
+  type = "submit",
+  onClick = "",
+  isButtonInCardTool = false,
 }) {
   return (
-    <button  type={type} onClick={onClick}
-      className={`${BACKGROUND_COLOR[bg]} ${TEXT_COLOR[color]} ${FONT_WEIGHT[weight]} ${TEXT_SIZE[size]} w-full rounded-lg h-full ${isButtonInCardTool?"":"active:scale-[95%]"} `}
+    <button
+      type={type}
+      onClick={onClick}
+      className={`${BACKGROUND_COLOR[bg]} ${TEXT_COLOR[color]} ${FONT_WEIGHT[weight]} ${TEXT_SIZE[size]} w-full rounded-lg h-full ${isButtonInCardTool ? "" : "active:scale-[95%]"} `}
     >
       {children}
     </button>

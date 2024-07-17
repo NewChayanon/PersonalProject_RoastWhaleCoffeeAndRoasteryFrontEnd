@@ -1,11 +1,7 @@
 /* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
 import userApi from "../apis/user";
-import {
-  getAccessToken,
-  removeAccessToken,
-  setAccessToken,
-} from "../utils/local-storage";
+import { getAccessToken, removeAccessToken, setAccessToken } from "../utils/local-storage";
 import { useNavigate } from "react-router-dom";
 
 export const UserContext = createContext();
@@ -15,7 +11,7 @@ export const UserContextProvider = ({ children }) => {
   const [cartUser, setCartUser] = useState(null);
   const [shoppingList, setShoppingList] = useState(null);
   const [res, setRes] = useState();
-  
+  const [googleLoginStatus, setGoogleLoginStatus] = useState(false);
 
   const handleLogin = async (credentials) => {
     const res = await userApi.Login(credentials);
@@ -25,6 +21,11 @@ export const UserContextProvider = ({ children }) => {
     setIsUser(getUser.data.user);
     setRes(res.data);
     return getUser;
+  };
+
+  const handleGoogleLogin = () => {
+    window.location.href = `http://localhost:8888/auth/google`;
+    setGoogleLoginStatus(true);
   };
 
   const handleLogout = () => {
@@ -46,11 +47,7 @@ export const UserContextProvider = ({ children }) => {
     setRes(res.data);
   };
 
-  const handleDecrementProductInCart = async (
-    productAndSizeId,
-    quantity,
-    cartItemId
-  ) => {
+  const handleDecrementProductInCart = async (productAndSizeId, quantity, cartItemId) => {
     quantity--;
     if (quantity <= 0) {
       const res = await userApi.deleteProductInCart(cartItemId);
@@ -81,8 +78,8 @@ export const UserContextProvider = ({ children }) => {
 
   const handleAddProductBySize = async (productAndSizeId, body) => {
     console.log(productAndSizeId, body);
-    const res = await userApi.addProduct(productAndSizeId, body)
-    setRes(res.data)
+    const res = await userApi.addProduct(productAndSizeId, body);
+    setRes(res.data);
   };
 
   useEffect(() => {
@@ -127,6 +124,9 @@ export const UserContextProvider = ({ children }) => {
         checkOutCart,
         shoppingList,
         handleAddProductBySize,
+        handleGoogleLogin,
+        googleLoginStatus,
+        setCartUser,
       }}
     >
       {children}

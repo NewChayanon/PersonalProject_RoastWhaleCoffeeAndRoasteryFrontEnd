@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Span from "../../components/Span";
 import Input from "../../components/Input";
 

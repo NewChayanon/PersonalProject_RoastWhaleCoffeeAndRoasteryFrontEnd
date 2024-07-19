@@ -88,25 +88,25 @@ export const UserContextProvider = ({ children }) => {
       setShoppingList(resShoppingList.data);
     };
     fetchCartUser();
-  }, [res]);
+  }, [isUser, res]);
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        if (getAccessToken()) {
-          const res = await userApi.getUser();
-          setIsUser(res.data.user);
-          const resCartUser = await userApi.cartUser();
-          setCartUser(resCartUser.data);
-          const resShoppingList = await userApi.getShoppingList();
-          setShoppingList(resShoppingList.data);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchUser();
-  }, []);
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     try {
+  //       if (getAccessToken()) {
+  //         const res = await userApi.getUser();
+  //         setIsUser(res.data.user);
+  //         const resCartUser = await userApi.cartUser();
+  //         setCartUser(resCartUser.data);
+  //         const resShoppingList = await userApi.getShoppingList();
+  //         setShoppingList(resShoppingList.data);
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   fetchUser();
+  // }, []);
 
   return (
     <UserContext.Provider

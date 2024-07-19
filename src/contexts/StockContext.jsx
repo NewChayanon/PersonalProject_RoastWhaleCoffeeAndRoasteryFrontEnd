@@ -16,7 +16,7 @@ export const StockContextProvider = ({ children }) => {
     const formData = new FormData();
     formData.append("productImage", file);
     formData.append("productId", res.data.id);
-    const resAddProductImage = stockApi.addProductImage(formData);
+    const resAddProductImage = await stockApi.addProductImage(formData);
     setAddCoffee(res.data);
     setRes(resAddProductImage);
   };

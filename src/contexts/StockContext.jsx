@@ -56,22 +56,6 @@ export const StockContextProvider = ({ children }) => {
     fetchCoffeeProduct();
   }, [addCoffee, res]);
 
-  useEffect(() => {
-    const fetchCoffeeProduct = async () => {
-      try {
-        const resGetCoffee = await stockApi.getCoffee();
-        setCoffeeProduct(resGetCoffee.data.coffee);
-        const resNewProduct = await stockApi.getNewProduct();
-        setNewProduct(resNewProduct.data.fetch);
-        const resGetTool = await stockApi.getTool();
-        setToolProduct(resGetTool.data.tool);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchCoffeeProduct();
-  }, []);
-
   return (
     <StockContext.Provider
       value={{

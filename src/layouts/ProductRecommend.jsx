@@ -1,17 +1,15 @@
 /* eslint-disable react/prop-types */
 import Span from "../components/Span";
-import Spinner from "../components/Spinner";
-import { useStock } from "../hooks/useStock";
 import ProductContainer from "./ProductContainer";
 
-export default function ProductRecommend({ title }) {
-  const { newProduct } = useStock();
+export default function ProductRecommend({ title, newProduct }) {
   return (
     <div className="py-5">
-      {!newProduct && <Spinner />}
       <div>
         <div className="flex justify-center py-8">
-          <Span size={36} width="ExtraBold">{title}</Span>
+          <Span size={36} width="ExtraBold">
+            {title}
+          </Span>
         </div>
         <div className="flex justify-center gap-5">
           {newProduct?.map((el) => (

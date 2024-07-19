@@ -9,7 +9,7 @@ export default function CartItemList({ cartItemId, productAndSizeId, name, descr
     <div className="grid grid-cols-4 border-t-[1px]">
       <div className=" w-full p-2 flex gap-2">
         <div className="h-full w-24 flex justify-center items-center ">
-          <img src={src ? `http://localhost:8888/${src}` : testImage} alt="cart-image" className="rounded-md" />
+          <img src={src ? src : testImage} alt="cart-image" className="rounded-md" />
         </div>
         <div className="w-full flex flex-col justify-center items-start">
           <Span size={14} width="SemiBold">

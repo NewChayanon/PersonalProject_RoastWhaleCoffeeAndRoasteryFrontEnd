@@ -4,7 +4,7 @@ import ProductContainer from "./ProductContainer";
 
 export default function ProductRecommend({ title, newProduct }) {
   return (
-    <div className="py-5">
+    <div className="py-5 ">
       <div>
         <div className="flex justify-center py-8">
           <Span size={36} width="ExtraBold">

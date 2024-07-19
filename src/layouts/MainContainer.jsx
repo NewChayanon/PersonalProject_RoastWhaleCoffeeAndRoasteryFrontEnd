@@ -8,7 +8,7 @@ export default function MainContainer() {
   const {isUser}=useUser()
   return (
     <div className="min-h-[100vh] flex flex-col justify-between">
-      {isUser && <Spinner/>}
+      {!isUser && <Spinner/>}
       <div>
         <Header />
         <Outlet />

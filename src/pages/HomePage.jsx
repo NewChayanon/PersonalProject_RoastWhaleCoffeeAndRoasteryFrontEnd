@@ -38,7 +38,7 @@ export default function HomePage() {
       }
     };
     fetchUser();
-  }, []);
+  }, [setIsUser]);
 
   return (
     <div>

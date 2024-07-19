@@ -23,7 +23,7 @@ export const UserContextProvider = ({ children }) => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = `http://localhost:8888/auth/google`;
+    window.location.href = import.meta.env.VITE_GOOGLE_API_LOGIN;
     setGoogleLoginStatus(true);
   };
 
@@ -125,6 +125,7 @@ export const UserContextProvider = ({ children }) => {
         handleGoogleLogin,
         googleLoginStatus,
         setCartUser,
+        setIsUser,
       }}
     >
       {children}

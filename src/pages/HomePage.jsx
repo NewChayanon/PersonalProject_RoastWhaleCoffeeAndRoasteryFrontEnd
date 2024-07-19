@@ -10,9 +10,10 @@ export default function HomePage() {
     const fetchUser = async () => {
       const query = new URLSearchParams(window.location.search);
       const tokenFromUrl = query.get("token");
-  
+
       if (tokenFromUrl) {
-        setAccessToken(tokenFromUrl);
+        const base64Token = decodeURIComponent(tokenFromUrl);
+        setAccessToken(base64Token);
         await userApi.getUser();
         window.history.replaceState({}, document.title, "/");
       }

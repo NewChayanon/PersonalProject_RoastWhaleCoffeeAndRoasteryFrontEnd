@@ -6,6 +6,7 @@ import { editProductValidator, handleValidateCoffee } from "../../validators/val
 import Span from "../../components/Span";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+import Spinner from "../../components/Spinner";
 
 export default function EditProductCoffee({ onSuccess, item, category }) {
   const initialInput = {
@@ -68,6 +69,7 @@ export default function EditProductCoffee({ onSuccess, item, category }) {
   };
   const [input, setInput] = useState(initialInput);
   const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(initialErrorMessage);
   const { handleEditCoffeeProduct, handleDeleteCoffee } = useStock();
 
@@ -97,15 +99,19 @@ export default function EditProductCoffee({ onSuccess, item, category }) {
         return setErrorMessage(error);
       }
       setErrorMessage(initialErrorMessage);
+      setLoading(true);
       await handleEditCoffeeProduct(input, file);
       onSuccess();
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <form className="m-4" onSubmit={handleSubmitForm}>
+      {loading && <Spinner />}
       <div className="mb-2">
         <Span>ชื่อสินค้า</Span>
         <Input

@@ -5,6 +5,7 @@ import Input from "../../../components/Input";
 import Span from "../../../components/Span";
 import { addCoffeeProductValidator, handleValidateCoffee } from "../../../validators/validators";
 import { useStock } from "../../../hooks/useStock";
+import Spinner from "../../../components/Spinner";
 
 export default function AddProductForm({ onSuccess, category }) {
   const initialInput = {
@@ -58,6 +59,7 @@ export default function AddProductForm({ onSuccess, category }) {
   const [errorMessage, setErrorMessage] = useState(initialErrorMessage);
   const [file, setFile] = useState(null);
   const [errorMessageFile, setErrorMessageFile] = useState("");
+  const [loading, setLoading] = useState(false);
   const { addProductCoffee } = useStock();
 
   const handleChangeInput = (e) => {
@@ -100,15 +102,19 @@ export default function AddProductForm({ onSuccess, category }) {
       }
       setErrorMessageFile("");
       setErrorMessage(initialErrorMessage);
+      setLoading(true);
       await addProductCoffee(input, file);
       onSuccess();
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <form className="m-4" onSubmit={handleSubmitForm}>
+      {loading && <Spinner />}
       <div>
         <Span>ชื่อสินค้า</Span>
         <Input

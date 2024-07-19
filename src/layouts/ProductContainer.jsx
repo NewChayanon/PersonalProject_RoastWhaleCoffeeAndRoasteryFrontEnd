@@ -33,15 +33,15 @@ export default function ProductContainer({ id, name, description, item, category
     },
     { lowestPrice: Infinity }
   );
-
+  
   return (
     <div className="w-[260px] max-h-[425px]  flex flex-col justify-between border rounded-lg border-[#FDEACE] shadow-md hover:scale-[105%] active:scale-100 transition-all">
-      <div>
+      <div className="h-[256px]">
         <Link className="relative" to={`/product/${id}`}>
           <img
             className="max-h-[16rem] w-96 rounded-t-lg "
-            src={src ? `http://localhost:8888/${src.image}` : testImage}
-            alt="test-image"
+            src={src ? src.image : testImage}
+            alt="product-image"
           />
 
           <div className={`absolute top-2 right-4 ${BACKGROUND_COLOR["Support02/500"]} py-1 px-2 rounded-md`}>

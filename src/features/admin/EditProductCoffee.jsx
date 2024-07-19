@@ -89,6 +89,18 @@ export default function EditProductCoffee({ onSuccess, item, category }) {
       tool: { ...input.tool, [e.target.name]: e.target.value },
     });
   };
+
+  const handleClickDeleteProduct = async () => {
+    try {
+      setLoading(true);
+      await handleDeleteCoffee(item.id)
+    } catch (error) {
+      console.log(error)
+    }finally{
+      setLoading(false);
+    }
+  }
+
   const handleSubmitForm = async (e) => {
     try {
       e.preventDefault();
@@ -267,7 +279,7 @@ export default function EditProductCoffee({ onSuccess, item, category }) {
       </div>
 
       <div className="flex h-9 justify-between">
-        <div className="w-72" onClick={() => handleDeleteCoffee(item.id)}>
+        <div className="w-72" onClick={handleClickDeleteProduct}>
           <Button id={item.id} type="button">
             ลบ
           </Button>

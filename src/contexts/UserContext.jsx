@@ -9,6 +9,7 @@ export const UserContextProvider = ({ children }) => {
   const [isUser, setIsUser] = useState(null);
   const [cartUser, setCartUser] = useState(null);
   const [res, setRes] = useState();
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (credentials) => {
     const res = await userApi.Login(credentials);
@@ -31,12 +32,14 @@ export const UserContextProvider = ({ children }) => {
   };
 
   const handleClickAddCoffeeToCart = async (productId) => {
+    setLoading(true);
     const body = { quantity: 1 };
     const res = await userApi.quickAdd(productId, body);
     setRes(res.data);
   };
 
   const handleIncrementProductInCart = async (productAndSizeId, quantity) => {
+    setLoading(true);
     quantity++;
     let body = { quantity };
     const res = await userApi.addAndUpdateProduct(productAndSizeId, body);
@@ -44,6 +47,7 @@ export const UserContextProvider = ({ children }) => {
   };
 
   const handleDecrementProductInCart = async (productAndSizeId, quantity, cartItemId) => {
+    setLoading(true);
     quantity--;
     if (quantity <= 0) {
       const res = await userApi.deleteProductInCart(cartItemId);
@@ -55,10 +59,14 @@ export const UserContextProvider = ({ children }) => {
   };
 
   const handleAllDeleteInCart = () => {
+    setLoading(true);
     cartUser.map(async (el) => {
       const res = await userApi.deleteProductInCart(el.id);
       setRes(res);
     });
+    if (cartUser.length === 0) {
+      setLoading(false);
+    }
   };
 
   const checkOutCart = async (input, payment, file) => {
@@ -81,6 +89,7 @@ export const UserContextProvider = ({ children }) => {
     const fetchCartUser = async () => {
       const resCartUser = await userApi.cartUser();
       setCartUser(resCartUser.data);
+      setLoading(false);
     };
     fetchCartUser();
   }, [isUser, res]);
@@ -115,6 +124,7 @@ export const UserContextProvider = ({ children }) => {
         handleGoogleLogin,
         setCartUser,
         setIsUser,
+        loading,
       }}
     >
       {children}

@@ -4,11 +4,13 @@ import Span from "../../../components/Span";
 import CartTable from "./CartTable";
 import Bill from "./Bill";
 import { useUser } from "../../../hooks/useUser";
+import Spinner from "../../../components/Spinner";
 
 export default function CartContainer() {
-  const { cartUser } = useUser();
+  const { loading, cartUser } = useUser();
   return (
     <div className="py-12">
+      {loading && <Spinner />}
       <div className="flex flex-col items-center">
         <Span size={36} width="ExtraBold">
           ตะกร้าสินค้า

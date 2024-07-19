@@ -9,12 +9,13 @@ import AddProductForm from "../features/stock/components/AddProductForm";
 import Spinner from "../components/Spinner";
 
 export default function ToolPage() {
-  const { isUser } = useUser();
+  const { loading, isUser } = useUser();
   const [open, setOpen] = useState(false);
   const { toolProduct } = useStock();
   return (
     <div className="flex flex-col py-12 items-center">
       {!toolProduct && <Spinner />}
+      {loading && <Spinner />}
       <div>
         <Span size={36} width="ExtraBold" color="Support01/500">
           อุปกรณ์ทำกาแฟ
@@ -36,12 +37,7 @@ export default function ToolPage() {
         {isUser?.["is_admin"] ? (
           <>
             <AddProduct onClick={() => setOpen(true)} />
-            <Modal
-              open={open}
-              onClose={() => setOpen(false)}
-              title="เพิ่ม / อัพเดท สินค้า"
-              width={44}
-            >
+            <Modal open={open} onClose={() => setOpen(false)} title="เพิ่ม / อัพเดท สินค้า" width={44}>
               <AddProductForm category="tool" onSuccess={() => setOpen(false)} />
             </Modal>
           </>

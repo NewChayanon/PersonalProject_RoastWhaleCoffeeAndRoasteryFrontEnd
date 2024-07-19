@@ -11,13 +11,12 @@ import { useUser } from "../hooks/useUser";
 import Span from "../components/Span";
 
 export default function HomePage() {
-  const { setIsUser } = useUser();
+  const { loading,setIsUser } = useUser();
   const [newProduct, setNewProduct] = useState();
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        // setLoading(true);
         const query = new URLSearchParams(window.location.search);
         const tokenFromUrl = query.get("token");
 
@@ -43,6 +42,7 @@ export default function HomePage() {
     <div>
       <StockContextProvider>
         {!newProduct && <Spinner />}
+        {loading && <Spinner />}
         <ImageSlidesShow />
         <div className="text-center">
           <Span width="ExtraBold" size={40}>

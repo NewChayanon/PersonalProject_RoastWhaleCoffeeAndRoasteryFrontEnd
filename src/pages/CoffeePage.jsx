@@ -9,14 +9,14 @@ import { useStock } from "../hooks/useStock";
 import Spinner from "../components/Spinner";
 
 export default function CoffeePage() {
-  const { isUser } = useUser();
+  const { loading, isUser } = useUser();
   const [open, setOpen] = useState(false);
   const { coffeeProduct } = useStock();
-  
-  
+
   return (
     <div className="flex flex-col py-12 items-center">
       {!coffeeProduct && <Spinner />}
+      {loading && <Spinner />}
       <div>
         <Span size={36} width="ExtraBold" color="Support01/500">
           เมล็ดกาแฟคั่วอ่อน
@@ -24,12 +24,11 @@ export default function CoffeePage() {
       </div>
       <div className="pt-2">
         <Span size={18} width="Regular" color="Neutral/500">
-          ระดับการคั่วอ่อนถือว่าเป็นการคั่วที่เก็บความเป็นธรรมชาติของเมล็ดกาแฟ
-          ได้สูงที่สุด แสดงความเป็นลักษณะของกาแฟแต่ละประเภทได้ดี
+          ระดับการคั่วอ่อนถือว่าเป็นการคั่วที่เก็บความเป็นธรรมชาติของเมล็ดกาแฟ ได้สูงที่สุด
+          แสดงความเป็นลักษณะของกาแฟแต่ละประเภทได้ดี
         </Span>
       </div>
       <div className="grid grid-cols-4 py-6 gap-4">
-      
         {coffeeProduct?.map((el) => (
           <ProductContainer
             key={el.id}
@@ -45,12 +44,7 @@ export default function CoffeePage() {
         {isUser?.["is_admin"] ? (
           <>
             <AddProduct onClick={() => setOpen(true)} />
-            <Modal
-              open={open}
-              onClose={() => setOpen(false)}
-              title="เพิ่ม / อัพเดท สินค้า"
-              width={44}
-            >
+            <Modal open={open} onClose={() => setOpen(false)} title="เพิ่ม / อัพเดท สินค้า" width={44}>
               <AddProductForm category="coffee" onSuccess={() => setOpen(false)} />
             </Modal>
           </>

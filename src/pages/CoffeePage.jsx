@@ -6,14 +6,17 @@ import { useUser } from "../hooks/useUser";
 import ProductContainer from "../layouts/ProductContainer";
 import AddProductForm from "../features/stock/components/AddProductForm";
 import { useStock } from "../hooks/useStock";
+import Spinner from "../components/Spinner";
 
 export default function CoffeePage() {
   const { isUser } = useUser();
   const [open, setOpen] = useState(false);
   const { coffeeProduct } = useStock();
   
+  
   return (
     <div className="flex flex-col py-12 items-center">
+      {!coffeeProduct && <Spinner />}
       <div>
         <Span size={36} width="ExtraBold" color="Support01/500">
           เมล็ดกาแฟคั่วอ่อน

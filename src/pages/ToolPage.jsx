@@ -6,6 +6,7 @@ import ProductContainer from "../layouts/ProductContainer";
 import Modal from "../components/Modal";
 import AddProduct from "../features/stock/components/AddProduct";
 import AddProductForm from "../features/stock/components/AddProductForm";
+import Spinner from "../components/Spinner";
 
 export default function ToolPage() {
   const { isUser } = useUser();
@@ -13,6 +14,7 @@ export default function ToolPage() {
   const { toolProduct } = useStock();
   return (
     <div className="flex flex-col py-12 items-center">
+      {!toolProduct && <Spinner />}
       <div>
         <Span size={36} width="ExtraBold" color="Support01/500">
           อุปกรณ์ทำกาแฟ

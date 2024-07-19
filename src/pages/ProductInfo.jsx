@@ -6,6 +6,7 @@ import ChooseBox from "../components/ChooseBox";
 import Button from "../components/Button";
 import CountNonApi from "../components/CountNonApi";
 import { useUser } from "../hooks/useUser";
+import Spinner from "../components/Spinner";
 
 export default function ProductInfo() {
   const { productId } = useParams();
@@ -54,10 +55,11 @@ export default function ProductInfo() {
   }, [productId]);
   return (
     <div className="flex justify-center gap-10 p-12">
+      {!productInfo?.image[0].image && <Spinner />}
       <div>
         <img
           className="max-w-[35rem] rounded-lg"
-          src={`http://localhost:8888/${productInfo?.image[0].image}`}
+          src={productInfo?.image[0].image}
           alt="product-image"
         />
       </div>

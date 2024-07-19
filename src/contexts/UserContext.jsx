@@ -8,9 +8,7 @@ export const UserContext = createContext();
 export const UserContextProvider = ({ children }) => {
   const [isUser, setIsUser] = useState(null);
   const [cartUser, setCartUser] = useState(null);
-  const [shoppingList, setShoppingList] = useState(null);
   const [res, setRes] = useState();
-  const [googleLoginStatus, setGoogleLoginStatus] = useState(false);
 
   const handleLogin = async (credentials) => {
     const res = await userApi.Login(credentials);
@@ -24,7 +22,6 @@ export const UserContextProvider = ({ children }) => {
 
   const handleGoogleLogin = () => {
     window.location.href = import.meta.env.VITE_GOOGLE_API_LOGIN;
-    setGoogleLoginStatus(true);
   };
 
   const handleLogout = () => {
@@ -84,8 +81,6 @@ export const UserContextProvider = ({ children }) => {
     const fetchCartUser = async () => {
       const resCartUser = await userApi.cartUser();
       setCartUser(resCartUser.data);
-      const resShoppingList = await userApi.getShoppingList();
-      setShoppingList(resShoppingList.data);
     };
     fetchCartUser();
   }, [isUser, res]);
@@ -96,10 +91,6 @@ export const UserContextProvider = ({ children }) => {
         if (getAccessToken()) {
           const res = await userApi.getUser();
           setIsUser(res.data.user);
-          const resCartUser = await userApi.cartUser();
-          setCartUser(resCartUser.data);
-          const resShoppingList = await userApi.getShoppingList();
-          setShoppingList(resShoppingList.data);
         }
       } catch (error) {
         console.log(error);
@@ -120,10 +111,8 @@ export const UserContextProvider = ({ children }) => {
         handleDecrementProductInCart,
         handleAllDeleteInCart,
         checkOutCart,
-        shoppingList,
         handleAddProductBySize,
         handleGoogleLogin,
-        googleLoginStatus,
         setCartUser,
         setIsUser,
       }}

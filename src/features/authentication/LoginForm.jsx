@@ -6,6 +6,7 @@ import { useState } from "react";
 import { loginValidator } from "../../validators/validators";
 import { useUser } from "../../hooks/useUser";
 import { IconGoogle } from "../../icons/icon";
+import Spinner from "../../components/Spinner";
 
 const initialInput = {
   email: "",
@@ -18,12 +19,14 @@ const initialErrorMessage = {
 export default function LoginForm() {
   const [input, setInput] = useState(initialInput);
   const [errorMessage, setErrorMessage] = useState(initialErrorMessage);
+  const [loading, setLoading] = useState(false);
   const { handleLogin, handleGoogleLogin } = useUser();
   const navigate = useNavigate();
 
   const handleChangeInput1 = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
+
   const handleSubmitInput = async (e) => {
     try {
       e.preventDefault();
@@ -32,15 +35,19 @@ export default function LoginForm() {
         return setErrorMessage(error);
       }
       setErrorMessage(initialErrorMessage);
+      setLoading(true);
       await handleLogin(input);
       navigate("/");
     } catch (error) {
       console.log(error);
+    }finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="w-full min-h-full flex justify-center items-center">
+      {loading && <Spinner />}
       <form className="w-[40rem]  flex flex-col border p-5 rounded-xl gap-7 items-center" onSubmit={handleSubmitInput}>
         <EmailAndPasswordForm title="เข้าสู่ระบบ" input={input} onChange={handleChangeInput1} error={errorMessage} />
 

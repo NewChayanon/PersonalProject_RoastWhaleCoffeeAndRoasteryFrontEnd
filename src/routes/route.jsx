@@ -1,19 +1,20 @@
 import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
-import MainContainer from "../layouts/MainContainer";
-import HomePage from "../pages/HomePage";
-import CoffeePage from "../pages/CoffeePage";
-import ToolPage from "../pages/ToolPage";
-import CartPage from "../pages/CartPage";
-import LoginPage from "../pages/LoginPage";
-import RegisterPage from "../pages/RegisterPage";
-import { StockContextProvider } from "../contexts/StockContext";
-import CheckOutPage from "../pages/ChackOutPage";
-import StatusOrderUserPage from "../pages/StatusOrderUserPage";
-import OrderPage from "../pages/OrderPage";
-import ProductInfo from "../pages/ProductInfo";
-import ProtectedRouteAdmin from "../features/authentication/ProtectedRouteAdmin";
-import ProtectedRouteUser from "../features/authentication/ProtectedRouteUser";
+import { lazy } from "react";
+const MainContainer = lazy(() => import("../layouts/MainContainer"));
+const HomePage = lazy(() => import("../pages/HomePage"));
+const CoffeePage = lazy(() => import("../pages/CoffeePage"));
+const ToolPage = lazy(() => import("../pages/ToolPage"));
+const CartPage = lazy(() => import("../pages/CartPage"));
+const LoginPage = lazy(() => import("../pages/LoginPage"));
+const RegisterPage = lazy(() => import("../pages/RegisterPage"));
+const { StockContextProvider } = lazy(() => import("../contexts/StockContext"));
+const CheckOutPage = lazy(() => import("../pages/ChackOutPage"));
+const StatusOrderUserPage = lazy(() => import("../pages/StatusOrderUserPage"));
+const OrderPage = lazy(() => import("../pages/OrderPage"));
+const ProductInfo = lazy(() => import("../pages/ProductInfo"));
+const ProtectedRouteAdmin = lazy(() => import("../features/authentication/ProtectedRouteAdmin"));
+const ProtectedRouteUser = lazy(() => import("../features/authentication/ProtectedRouteUser"));
 
 const router = createBrowserRouter([
   {

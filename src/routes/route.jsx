@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
 import { lazy } from "react";
+import { StockContextProvider } from "../contexts/StockContext";
 const MainContainer = lazy(() => import("../layouts/MainContainer"));
 const HomePage = lazy(() => import("../pages/HomePage"));
 const CoffeePage = lazy(() => import("../pages/CoffeePage"));
@@ -8,7 +9,7 @@ const ToolPage = lazy(() => import("../pages/ToolPage"));
 const CartPage = lazy(() => import("../pages/CartPage"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
 const RegisterPage = lazy(() => import("../pages/RegisterPage"));
-const { StockContextProvider } = lazy(() => import("../contexts/StockContext"));
+
 const CheckOutPage = lazy(() => import("../pages/ChackOutPage"));
 const StatusOrderUserPage = lazy(() => import("../pages/StatusOrderUserPage"));
 const OrderPage = lazy(() => import("../pages/OrderPage"));

@@ -8,6 +8,7 @@ export default function Count({ cartItemId, productAndSizeId, quantity }) {
   return (
     <div className="border rounded-lg w-[5rem] flex justify-around">
       <div
+      role="button"
         className="p-1 flex justify-center items-center"
         onClick={() => handleDecrementProductInCart(productAndSizeId, quantity, cartItemId)}
       >
@@ -17,6 +18,7 @@ export default function Count({ cartItemId, productAndSizeId, quantity }) {
         <Span>{quantity}</Span>
       </div>
       <div
+      role="button"
         className="p-1 flex justify-center items-center"
         onClick={() => handleIncrementProductInCart(productAndSizeId, quantity)}
       >

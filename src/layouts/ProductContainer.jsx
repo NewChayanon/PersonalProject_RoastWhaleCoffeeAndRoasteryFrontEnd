@@ -9,6 +9,7 @@ import EditProductCoffee from "../features/admin/EditProductCoffee";
 import { BACKGROUND_COLOR } from "../constants/InfoFigma";
 import { Link, useNavigate } from "react-router-dom";
 import formatCurrency from "../utils/currency-format";
+import PTag from "../components/PTag";
 
 export default function ProductContainer({ id, name, description, item, category, src }) {
   const [open, setOpen] = useState(false);
@@ -56,9 +57,9 @@ export default function ProductContainer({ id, name, description, item, category
           </Span>
         </div>
         <div className="h-14 text-clip">
-          <Span size={12} color="Support01/950" width="Regular">
+          <PTag size={12} color="Support01/950" width="Regular">
             {description}
-          </Span>
+          </PTag>
         </div>
         <div className=" h-7">
           <Button isButtonInCardTool={true}>

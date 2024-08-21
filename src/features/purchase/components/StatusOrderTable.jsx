@@ -16,8 +16,8 @@ export default function StatusOrderTable() {
   });
 
   return (
-    <div>
-      <div className="flex justify-between items-center py-3">
+    <div className="min-h-[400px] min-w-[800px]">
+      <div className="flex justify-between items-center py-3 ">
         {loading && <Spinner />}
         <Span size={20} width="SemiBold">
           สินค้า

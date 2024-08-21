@@ -1,18 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
-import { StockContextProvider } from "../contexts/StockContext";
+import { useEffect } from "react";
 import ImageSlidesShow from "../layouts/ImageSlidesShow";
 import ProductRecommend from "../layouts/ProductRecommend";
 import userApi from "../apis/user";
 import { setAccessToken } from "../utils/local-storage";
-import stockApi from "../apis/stock";
 import Spinner from "../components/Spinner";
 import { useUser } from "../hooks/useUser";
 import Span from "../components/Span";
+import { useStock } from "../hooks/useStock";
 
 export default function HomePage() {
-  const { loading,setIsUser } = useUser();
-  const [newProduct, setNewProduct] = useState();
+  const { loading, setIsUser } = useUser();
+  const { newProduct } = useStock();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -23,13 +22,9 @@ export default function HomePage() {
         if (tokenFromUrl) {
           const base64Token = decodeURIComponent(tokenFromUrl);
           setAccessToken(base64Token);
-          const [resUser, resNewProduct] = await Promise.all([userApi.getUser(), stockApi.getNewProduct()]);
+          const [resUser] = await Promise.all([userApi.getUser()]);
           setIsUser(resUser.data.user);
-          setNewProduct(resNewProduct.data.fetch);
           window.history.replaceState({}, document.title, "/");
-        } else {
-          const resNewProduct = await stockApi.getNewProduct();
-          setNewProduct(resNewProduct.data.fetch);
         }
       } catch (error) {
         console.log(error);
@@ -40,9 +35,8 @@ export default function HomePage() {
 
   return (
     <div>
-      <StockContextProvider>
-        {!newProduct && <Spinner />}
         {loading && <Spinner />}
+        {!newProduct && <Spinner />}
         <ImageSlidesShow />
         <div className="text-center">
           <Span width="ExtraBold" size={40}>
@@ -51,7 +45,6 @@ export default function HomePage() {
         </div>
         <ProductRecommend title="สินค้าใหม่" newProduct={newProduct} />
         <ProductRecommend title="สินค้าขายดี (coming soon)" newProduct={newProduct} />
-      </StockContextProvider>
     </div>
   );
 }

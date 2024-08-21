@@ -6,6 +6,7 @@ import Button from "../../../components/Button";
 import Bill from "./Bill";
 import { useUser } from "../../../hooks/useUser";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../../../components/Spinner";
 
 const initialInput = {
   firstName: "",
@@ -48,7 +49,7 @@ export default function CheckOutForm() {
   const [errorMessagePayment, setErrorMessagePayment] = useState(initialPaymentError);
   const [file, setFile] = useState(null);
   const [errorMessageFile, setErrorMessageFile] = useState("");
-  const { isUser, checkOutCart } = useUser();
+  const { isUser, checkOutCart, loading } = useUser();
 
   const navigator = useNavigate();
 
@@ -93,6 +94,7 @@ export default function CheckOutForm() {
 
   return (
     <div className="flex flex-col ">
+      {loading && <Spinner/>}
       <div className="flex justify-center pt-8 pb-4">
         <Span size={40} width="ExtraBold">
           ชำระเงิน

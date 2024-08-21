@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
 import { lazy } from "react";
-import { StockContextProvider } from "../contexts/StockContext";
 const MainContainer = lazy(() => import("../layouts/MainContainer"));
 const HomePage = lazy(() => import("../pages/HomePage"));
 const CoffeePage = lazy(() => import("../pages/CoffeePage"));
@@ -14,30 +13,29 @@ const CheckOutPage = lazy(() => import("../pages/ChackOutPage"));
 const StatusOrderUserPage = lazy(() => import("../pages/StatusOrderUserPage"));
 const OrderPage = lazy(() => import("../pages/OrderPage"));
 const ProductInfo = lazy(() => import("../pages/ProductInfo"));
-const ProtectedRouteAdmin = lazy(() => import("../features/authentication/ProtectedRouteAdmin"));
-const ProtectedRouteUser = lazy(() => import("../features/authentication/ProtectedRouteUser"));
+const ProtectedRouteAdmin = lazy(() =>
+  import("../features/authentication/ProtectedRouteAdmin")
+);
+const ProtectedRouteUser = lazy(() =>
+  import("../features/authentication/ProtectedRouteUser")
+);
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainContainer />,
     children: [
-      { path: "/", element: <HomePage /> },
+      {
+        path: "/",
+        element: <HomePage />,
+      },
       {
         path: "/product-coffees",
-        element: (
-          <StockContextProvider>
-            <CoffeePage />
-          </StockContextProvider>
-        ),
+        element: <CoffeePage />,
       },
       {
         path: "/product-tools",
-        element: (
-          <StockContextProvider>
-            <ToolPage />
-          </StockContextProvider>
-        ),
+        element: <ToolPage />,
       },
       {
         path: "/carts",

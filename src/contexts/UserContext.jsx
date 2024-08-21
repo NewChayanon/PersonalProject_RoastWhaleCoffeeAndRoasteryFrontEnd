@@ -1,15 +1,21 @@
 /* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
 import userApi from "../apis/user";
-import { getAccessToken, removeAccessToken, setAccessToken } from "../utils/local-storage";
+import {
+  getAccessToken,
+  removeAccessToken,
+  setAccessToken,
+} from "../utils/local-storage";
 
 export const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
   const [isUser, setIsUser] = useState(null);
   const [cartUser, setCartUser] = useState(null);
-  const [res, setRes] = useState();
+  const [res, setRes] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [shoppingList, setShoppingList] = useState([]);
+  const [checkout, setCheckout] = useState(false);
 
   const handleLogin = async (credentials) => {
     const res = await userApi.Login(credentials);
@@ -17,7 +23,7 @@ export const UserContextProvider = ({ children }) => {
     setAccessToken(res.data.accessToken);
     const getUser = await userApi.getUser();
     setIsUser(getUser.data.user);
-    setRes(res.data);
+    setRes(!res);
     return getUser;
   };
 
@@ -34,35 +40,35 @@ export const UserContextProvider = ({ children }) => {
   const handleClickAddCoffeeToCart = async (productId) => {
     setLoading(true);
     const body = { quantity: 1 };
-    const res = await userApi.quickAdd(productId, body);
-    setRes(res.data);
+    await userApi.quickAdd(productId, body);
+    setRes(!res);
   };
 
   const handleIncrementProductInCart = async (productAndSizeId, quantity) => {
     setLoading(true);
     quantity++;
     let body = { quantity };
-    const res = await userApi.addAndUpdateProduct(productAndSizeId, body);
-    setRes(res.data);
+    await userApi.addAndUpdateProduct(productAndSizeId, body);
+    setRes(!res);
   };
 
   const handleDecrementProductInCart = async (productAndSizeId, quantity, cartItemId) => {
     setLoading(true);
     quantity--;
     if (quantity <= 0) {
-      const res = await userApi.deleteProductInCart(cartItemId);
-      return setRes(res.data);
+      await userApi.deleteProductInCart(cartItemId);
+      return setRes(!res);
     }
     let body = { quantity };
-    const res = await userApi.addAndUpdateProduct(productAndSizeId, body);
-    setRes(res.data);
+    await userApi.addAndUpdateProduct(productAndSizeId, body);
+    setRes(!res);
   };
 
   const handleAllDeleteInCart = () => {
     setLoading(true);
     cartUser.map(async (el) => {
-      const res = await userApi.deleteProductInCart(el.id);
-      setRes(res);
+      await userApi.deleteProductInCart(el.id);
+      setRes(!res);
     });
     if (cartUser.length === 0) {
       setLoading(false);
@@ -70,19 +76,20 @@ export const UserContextProvider = ({ children }) => {
   };
 
   const checkOutCart = async (input, payment, file) => {
-    const resAddress = await userApi.address(input);
+    setLoading(true);
+    await userApi.address(input);
     const resPayment = await userApi.payment(payment);
     const formData = new FormData();
     formData.append("paymentImage", file);
     formData.append("orderId", resPayment.data.id);
     await userApi.updatePaymentImage(formData);
-    setRes(resAddress);
-    setRes(resPayment);
+    setRes(!res);
+    setCheckout(true);
   };
 
   const handleAddProductBySize = async (productAndSizeId, body) => {
-    const res = await userApi.addProduct(productAndSizeId, body);
-    setRes(res.data);
+    await userApi.addProduct(productAndSizeId, body);
+    setRes(!res);
   };
 
   useEffect(() => {
@@ -108,23 +115,38 @@ export const UserContextProvider = ({ children }) => {
     fetchUser();
   }, []);
 
+  useEffect(() => {
+    const fetchShoppingList = async () => {
+      try {
+        const resShoppingList = await userApi.getShoppingList();
+        setShoppingList(resShoppingList.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchShoppingList();
+  }, [checkout]);
+
   return (
     <UserContext.Provider
       value={{
         isUser,
+        loading,
+        cartUser,
+        checkOutCart,
+        shoppingList,
+
         handleLogin,
         handleLogout,
+        handleGoogleLogin,
+        handleAllDeleteInCart,
+        handleAddProductBySize,
         handleClickAddCoffeeToCart,
-        cartUser,
         handleIncrementProductInCart,
         handleDecrementProductInCart,
-        handleAllDeleteInCart,
-        checkOutCart,
-        handleAddProductBySize,
-        handleGoogleLogin,
-        setCartUser,
+
         setIsUser,
-        loading,
+        setCartUser,
       }}
     >
       {children}

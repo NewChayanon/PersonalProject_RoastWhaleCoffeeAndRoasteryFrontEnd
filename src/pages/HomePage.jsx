@@ -10,7 +10,7 @@ import Span from "../components/Span";
 import { useStock } from "../hooks/useStock";
 
 export default function HomePage() {
-  const { loading, setIsUser } = useUser();
+  const { setIsUser } = useUser();
   const { newProduct } = useStock();
 
   useEffect(() => {
@@ -35,7 +35,6 @@ export default function HomePage() {
 
   return (
     <div>
-        {loading && <Spinner />}
         {!newProduct && <Spinner />}
         <ImageSlidesShow />
         <div className="text-center">

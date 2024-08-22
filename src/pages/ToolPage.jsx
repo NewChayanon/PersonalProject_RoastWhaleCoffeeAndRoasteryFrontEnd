@@ -15,7 +15,6 @@ export default function ToolPage() {
   return (
     <div className="flex flex-col py-12 items-center">
       {!toolProduct && <Spinner />}
-      {loading && <Spinner />}
       <div>
         <Span size={36} width="ExtraBold" color="Support01/500">
           อุปกรณ์ทำกาแฟ
